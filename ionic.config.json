@@ -1,0 +1,7 @@
+{
+  "name": "Big Times",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
