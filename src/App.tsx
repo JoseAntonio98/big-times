@@ -23,6 +23,8 @@ import { IonReactRouter } from "@ionic/react-router";
 import { Redirect, Route } from "react-router";
 import HomePage from "./pages/HomePage";
 
+import "./App.css";
+
 setupIonicReact();
 
 const App: React.FC = () => (

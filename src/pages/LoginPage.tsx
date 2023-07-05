@@ -1,16 +1,7 @@
-import {
-  IonButton,
-  IonContent,
-  IonHeader,
-  IonIcon,
-  IonPage,
-  IonText,
-  IonTitle,
-  IonToolbar,
-} from "@ionic/react";
+import { IonButton, IonContent, IonIcon, IonPage, IonText } from "@ionic/react";
 import { logoGoogle, logoApple } from "ionicons/icons";
 import React from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import WelcomeImage from "../assets/bigtimes.png";
 import "./LoginPage.css";
@@ -20,7 +11,7 @@ const LoginPage: React.FC = () => {
 
   const handleLogin = () => {
     // Lógica de autenticación y validación
-    console.log("Hi");
+    // Usar una función para Google y Apple o en su defecto por separado
 
     // Navegar a la página de Home
     history.push("/home");

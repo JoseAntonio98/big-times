@@ -1,25 +1,21 @@
 import {
   IonContent,
-  IonHeader,
   IonPage,
-  IonTitle,
-  IonToolbar,
+  IonSearchbar,
 } from "@ionic/react";
+import EntriesHeader from "../components/EntriesHeader";
+import Entries from "../components/Entries";
 
 const EntriesPage: React.FC = () => {
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Entries</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Entries</IonTitle>
-          </IonToolbar>
-        </IonHeader>
+      <IonContent fullscreen className="ion-padding">
+        <div>
+          <EntriesHeader username="Eve" />
+          <IonSearchbar animated={true} placeholder="Search"></IonSearchbar>
+          <Entries title="Personal"/>
+          <Entries title="Community"/>
+        </div>
       </IonContent>
     </IonPage>
   );
