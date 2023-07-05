@@ -2,7 +2,7 @@ import { IonContent, IonPage, IonSearchbar } from "@ionic/react";
 import EntriesHeader from "../components/EntriesHeader";
 import Entries from "../components/Entries";
 
-import { auth } from "../firebaseConfig";
+import { auth } from "../FirebaseConfig";
 
 const EntriesPage: React.FC = () => {
   const personal = [1, 2];

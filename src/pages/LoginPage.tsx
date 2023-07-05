@@ -3,7 +3,7 @@ import { logoGoogle, logoApple } from "ionicons/icons";
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-import { auth, providerGoogle } from "../firebaseConfig"
+import { auth, providerGoogle } from "../FirebaseConfig"
 
 import WelcomeImage from "../assets/bigtimes.png";
 import "./LoginPage.css";

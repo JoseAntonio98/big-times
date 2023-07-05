@@ -16,7 +16,7 @@ import CalendarPage from "./CalendarPage";
 import MediaPage from "./MediaPage";
 
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../firebaseConfig"
+import { auth } from "../FirebaseConfig"
 
 const HomePage: React.FC = () => {
 
