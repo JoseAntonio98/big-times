@@ -1,5 +1,5 @@
 .entries-container {
-    margin-bottom: 3rem;
+  margin-bottom: 3rem;
 }
 
 .entries-header {
@@ -27,4 +27,8 @@ h1 {
 p {
   margin: 0;
   padding: 0;
+}
+
+.margin {
+  padding-top: 1.5rem;
 }
