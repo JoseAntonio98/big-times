@@ -1,25 +1,17 @@
-import {
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-} from "@ionic/react";
+import { IonContent, IonImg, IonPage, IonText } from "@ionic/react";
+import EntriesHeader from "../components/EntriesHeader";
+
+import "./Calendar.css";
+import Programming from "../assets/programming.svg";
 
 const CalendarPage: React.FC = () => {
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Calendar</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Calendar</IonTitle>
-          </IonToolbar>
-        </IonHeader>
+      <IonContent fullscreen className="ion-padding">
+        <EntriesHeader title="Calendar" />
+        <div className="center-container">
+          <IonImg src={Programming}></IonImg>
+        </div>
       </IonContent>
     </IonPage>
   );
