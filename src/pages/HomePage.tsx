@@ -15,7 +15,20 @@ import AddPage from "./AddPage";
 import CalendarPage from "./CalendarPage";
 import MediaPage from "./MediaPage";
 
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../firebaseConfig"
+
 const HomePage: React.FC = () => {
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log(user.displayName)
+    }
+    else {
+      console.log("Debe iniciar sesión")
+    }
+  });
+
   return (
     <IonPage>
       <IonReactRouter>
