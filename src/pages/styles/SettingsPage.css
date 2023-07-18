@@ -1,4 +1,11 @@
-.center-container {
-  margin-top: 20vh;
-  text-align: center;
+.custom-sp-container {
+  margin-top: 3rem;
+}
+
+.custom-sp-title {
+  font-size: 1.1rem;
+  /* color: var(--ion-color-dark-tint); */
+  color: var(--ion-color-primary-shade);
+  text-transform: uppercase;
+  font-weight: 600;
 }

@@ -1,5 +1,5 @@
 import { IonContent, IonPage, IonSearchbar } from "@ionic/react";
-import EntriesHeader from "../components/EntriesHeader";
+import HeaderScreen from "../components/HeaderScreen";
 import Entries from "../components/Entries";
 
 import { auth } from "../FirebaseConfig";
@@ -19,7 +19,7 @@ const DiaryPage: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen className="ion-padding">
-        <EntriesHeader title={`Diary `} />
+        <HeaderScreen title={`Diary `} />
         <IonSearchbar animated={true} placeholder="Search"></IonSearchbar>
         <DayMessage />
         {entries ? (

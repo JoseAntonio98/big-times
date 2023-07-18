@@ -9,7 +9,7 @@ import {
   IonText,
   IonTextarea,
 } from "@ionic/react";
-import EntriesHeader from "../components/EntriesHeader";
+import HeaderScreen from "../components/HeaderScreen";
 
 import "./styles/AddPage.css";
 import { attach, camera, happy, image, mic, text } from "ionicons/icons";
@@ -23,7 +23,7 @@ const AddPage: React.FC = () => {
     <IonPage>
       <IonContent fullscreen className="ion-padding">
         <div>
-          <EntriesHeader title="Write an entry" />
+          <HeaderScreen title="Write an entry" />
 
           <IonList className="form-container">
             <IonInput

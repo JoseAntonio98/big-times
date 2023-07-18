@@ -1,12 +1,12 @@
 import { IonContent, IonPage } from "@ionic/react";
-import EntriesHeader from "../components/EntriesHeader";
+import HeaderScreen from "../components/HeaderScreen";
 
 const InsightsPage: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen className="ion-padding">
         <div>
-          <EntriesHeader title="Insights" />
+          <HeaderScreen title="Insights" />
         </div>
       </IonContent>
     </IonPage>

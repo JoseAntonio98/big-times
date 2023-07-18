@@ -4,7 +4,7 @@ import { IonContent, IonPage } from "@ionic/react";
 import Calendar from "react-calendar";
 
 import CalendarEmpty from "../components/CalendarEmpty";
-import EntriesHeader from "../components/EntriesHeader";
+import HeaderScreen from "../components/HeaderScreen";
 import Entry from "../components/Entry";
 
 import "react-calendar/dist/Calendar.css";
@@ -17,7 +17,7 @@ const CalendarPage: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen className="ion-padding">
-        <EntriesHeader title="Calendar" />
+        <HeaderScreen title="Calendar" />
         <Calendar onChange={onChange} value={value} />
         {entries ? (
           <div style={{ marginTop: "2rem" }}>
