@@ -17,6 +17,8 @@ interface EntriesProps {
   entries: any[];
 }
 
+// TODO: DELETE - Only for reference
+
 const Entries: React.FC<EntriesProps> = ({ title, entries }) => {
   return (
     <div className={title ? "entries-container" : "entries-container margin"}>
