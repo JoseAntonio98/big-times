@@ -1,8 +1,8 @@
 import React from "react";
 
-import "./styles/EntriesEmpty.css";
+import "./styles/DiaryEmpty.css";
 
-const EntriesEmpty: React.FC = () => {
+const DiaryEmpty: React.FC = () => {
   return (
     <div className="container-center">
       <h1 className="ee-title">Nothing here yet</h1>
@@ -14,4 +14,4 @@ const EntriesEmpty: React.FC = () => {
   );
 };
 
-export default EntriesEmpty;
+export default DiaryEmpty;

@@ -11,7 +11,7 @@ import {
   IonTabs,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { add, calendar, eye, list, settings } from "ionicons/icons";
+import { add, book, calendar, eye, settings } from "ionicons/icons";
 import DiaryPage from "./DiaryPage";
 import FavoritesPage from "./InsightsPage";
 import AddPage from "./AddPage";
@@ -57,7 +57,7 @@ const HomePage: React.FC = () => {
 
           <IonTabBar slot="bottom">
             <IonTabButton tab="diary" href="/home/diary">
-              <IonIcon aria-hidden="true" icon={list} />
+              <IonIcon aria-hidden="true" icon={book} />
               <IonLabel>Diary</IonLabel>
             </IonTabButton>
             <IonTabButton tab="calendar" href="/home/calendar">
