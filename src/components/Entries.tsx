@@ -31,7 +31,7 @@ const Entries: React.FC<EntriesProps> = ({ title, entries }) => {
       ) : null}
 
       {entries.map((entry, index) => (
-        <IonCard key={index} color="secondary">
+        <IonCard key={index} color="primary">
           <IonCardHeader>
             <IonCardTitle>03 | July 2024, Wednesday</IonCardTitle>
             <IonCardSubtitle>Mom's birthday</IonCardSubtitle>
@@ -43,29 +43,6 @@ const Entries: React.FC<EntriesProps> = ({ title, entries }) => {
           </IonCardContent>
         </IonCard>
       ))}
-      {/* <IonCard color="secondary">
-        <IonCardHeader>
-          <IonCardTitle>03 | July 2024, Wednesday</IonCardTitle>
-          <IonCardSubtitle>Mom's birthday</IonCardSubtitle>
-        </IonCardHeader>
-
-        <IonCardContent>
-          Here's a small text description for the card content. Nothing more,
-          nothing less.
-        </IonCardContent>
-      </IonCard>
-
-      <IonCard color="secondary">
-        <IonCardHeader>
-          <IonCardTitle>03 | July 2024, Wednesday</IonCardTitle>
-          <IonCardSubtitle>Mom's birthday</IonCardSubtitle>
-        </IonCardHeader>
-
-        <IonCardContent>
-          Here's a small text description for the card content. Nothing more,
-          nothing less.
-        </IonCardContent>
-      </IonCard> */}
     </div>
   );
 };

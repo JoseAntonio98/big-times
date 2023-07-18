@@ -34,7 +34,7 @@ const LoginPage: React.FC = () => {
         <div className="container">
           <img alt="Silhouette of mountains" src={WelcomeImage} />
           <IonText className="app-subtitle">Because we all have</IonText>
-          <IonText color="secondary" className="app-name">
+          <IonText className="app-name">
             Big Times
           </IonText>
 

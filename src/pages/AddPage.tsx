@@ -72,7 +72,7 @@ const AddPage: React.FC = () => {
               </IonItem>
             </IonList>
 
-            <IonButton className="btn-save" expand="block" color="secondary">
+            <IonButton className="btn-save" expand="block">
               <IonText className="text-save">Save</IonText>
             </IonButton>
           </IonList>
