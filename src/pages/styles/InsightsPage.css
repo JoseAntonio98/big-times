@@ -1,0 +1,60 @@
+.custom-ip-container {
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.custom-ip-box-shadow {
+  align-items: center;
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 0 0 var(--ion-color-medium-tint);
+}
+
+.custom-ip-entries-stats {
+  margin-top: 1.5rem;
+  margin-bottom: 3rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  gap: 10px;
+}
+
+.custom-ip-entry {
+  text-align: center;
+  padding: 10px;
+}
+
+.custom-ip-entry h1 {
+  font-size: 1.75rem;
+  color: var(--ion-color-dark-tint);
+  font-weight: 600;
+}
+
+.custom-ip-entry h2 {
+  font-size: 1rem;
+}
+
+.custom-ip-streak {
+  grid-column: 1 / span 3;
+  text-align: center;
+}
+
+.custom-ip-mood-stats {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: auto;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.custom-ip-mood-chart {
+  background-color: var(--ion-color-secondary-tint);
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
+
+.custom-ip-mood-item {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 0.25rem;
+}

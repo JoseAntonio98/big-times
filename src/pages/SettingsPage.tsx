@@ -13,7 +13,6 @@ import {
   cloudOutline,
   colorPaletteOutline,
   keyOutline,
-  logOut,
   logOutOutline,
   notificationsOutline,
   trashBinOutline,
