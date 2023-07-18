@@ -11,15 +11,8 @@ import {
 } from "@ionic/react";
 import EntriesHeader from "../components/EntriesHeader";
 
-import "./AddPage.css";
-import {
-  attach,
-  camera,
-  happy,
-  image,
-  mic,
-  text,
-} from "ionicons/icons";
+import "./styles/AddPage.css";
+import { attach, camera, happy, image, mic, text } from "ionicons/icons";
 
 const AddPage: React.FC = () => {
   const handleSave = () => {

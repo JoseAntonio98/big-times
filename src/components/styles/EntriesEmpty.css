@@ -1,0 +1,21 @@
+.container-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 60%;
+}
+
+.ee-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: var(--ion-color-primary);
+}
+
+.ee-message {
+  font-size: 1.15rem;
+  text-align: center;
+  line-height: 1.75rem;
+  color: var(--ion-color-dark-tint);
+}

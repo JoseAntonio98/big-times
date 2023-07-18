@@ -1,0 +1,23 @@
+.form-container {
+  padding: 1rem;
+}
+
+.input {
+  margin-top: 1.5rem;
+  padding: 0.5rem;
+}
+
+.text-save {
+  font-family: "Montserrat";
+  text-transform: capitalize;
+}
+
+.btn-save {
+  margin-top: 2rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

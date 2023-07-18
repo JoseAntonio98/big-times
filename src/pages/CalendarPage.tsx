@@ -1,7 +1,7 @@
 import { IonContent, IonImg, IonPage, IonText } from "@ionic/react";
 import EntriesHeader from "../components/EntriesHeader";
 
-import "./Calendar.css";
+import "./styles/CalendarPage.css";
 
 const CalendarPage: React.FC = () => {
   return (

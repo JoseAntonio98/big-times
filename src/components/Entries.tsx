@@ -10,7 +10,7 @@ import {
 import { chevronForward } from "ionicons/icons";
 import React from "react";
 
-import "./Entries.css";
+import "./styles/Entries.css";
 
 interface EntriesProps {
   title?: string;

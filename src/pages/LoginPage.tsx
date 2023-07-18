@@ -3,22 +3,20 @@ import { logoGoogle, logoApple } from "ionicons/icons";
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-import { auth, providerGoogle } from "../FirebaseConfig"
+import { auth, providerGoogle } from "../FirebaseConfig";
 
 import WelcomeImage from "../assets/bigtimes.png";
-import "./LoginPage.css";
+import "./styles/LoginPage.css";
 import { signInWithRedirect, onAuthStateChanged } from "firebase/auth";
 
 const LoginPage: React.FC = () => {
-  
   let history = useHistory();
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
       //const uid = user.uid;
       history.push("/home");
-    }
-    else {
+    } else {
       console.log("Debe iniciar sesión");
       history.push("/login");
     }
@@ -34,9 +32,7 @@ const LoginPage: React.FC = () => {
         <div className="container">
           <img alt="Silhouette of mountains" src={WelcomeImage} />
           <IonText className="app-subtitle">Because we all have</IonText>
-          <IonText className="app-name">
-            Big Times
-          </IonText>
+          <IonText className="app-name">Big Times</IonText>
 
           <div>
             <IonButton

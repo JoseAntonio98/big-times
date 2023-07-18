@@ -12,7 +12,7 @@ import {
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { add, calendar, eye, list, settings } from "ionicons/icons";
-import EntriesPage from "./EntriesPage";
+import DiaryPage from "./DiaryPage";
 import FavoritesPage from "./InsightsPage";
 import AddPage from "./AddPage";
 import CalendarPage from "./CalendarPage";
@@ -35,8 +35,8 @@ const HomePage: React.FC = () => {
       <IonReactRouter>
         <IonTabs>
           <IonRouterOutlet>
-            <Route exact path="/home/entries">
-              <EntriesPage />
+            <Route exact path="/home/diary">
+              <DiaryPage />
             </Route>
             <Route exact path="/home/calendar">
               <CalendarPage />
@@ -51,12 +51,12 @@ const HomePage: React.FC = () => {
               <MediaPage />
             </Route>
             <Route exact path="/home">
-              <Redirect to="/home/entries" />
+              <Redirect to="/home/diary" />
             </Route>
           </IonRouterOutlet>
 
           <IonTabBar slot="bottom">
-            <IonTabButton tab="entries" href="/home/entries">
+            <IonTabButton tab="diary" href="/home/diary">
               <IonIcon aria-hidden="true" icon={list} />
               <IonLabel>Diary</IonLabel>
             </IonTabButton>

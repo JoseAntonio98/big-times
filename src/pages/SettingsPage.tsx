@@ -1,7 +1,7 @@
 import { IonContent, IonPage } from "@ionic/react";
 import EntriesHeader from "../components/EntriesHeader";
 
-import "./SettingsPage.css";
+import "./styles/SettingsPage.css";
 
 const SettingsPage: React.FC = () => {
   return (
