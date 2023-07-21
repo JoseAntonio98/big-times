@@ -1,9 +1,11 @@
 import {
   IonButton,
   IonContent,
+  IonDatetime,
   IonIcon,
   IonInput,
   IonItem,
+  IonLabel,
   IonList,
   IonPage,
   IonText,
@@ -13,11 +15,15 @@ import HeaderScreen from "../components/HeaderScreen";
 
 import "./styles/AddPage.css";
 import { attach, camera, happy, image, mic, text } from "ionicons/icons";
+import { useState } from "react";
 
 const AddPage: React.FC = () => {
   const handleSave = () => {
     // Save entry
   };
+
+  // TODO: Dar estilos a Datetime Picker
+  // https://www.youtube.com/watch?v=UEfFjfW7Zes
 
   return (
     <IonPage>
@@ -25,24 +31,36 @@ const AddPage: React.FC = () => {
         <div>
           <HeaderScreen title="Write an entry" />
 
-          <IonList className="form-container">
-            <IonInput
-              className="input"
-              label="Title: "
-              labelPlacement="floating"
-              placeholder="A description for you momemnt"
-              fill="outline"
-              counter={true}
-              maxlength={40}
-            ></IonInput>
-            <IonTextarea
-              className="input"
-              placeholder="Write all you want!"
-              label="Description:"
-              labelPlacement="floating"
-              rows={20}
-              fill="outline"
-            ></IonTextarea>
+          <IonList>
+            <IonItem>
+              <IonDatetime
+                placeholder="Seleccione una fecha"
+                presentation="date-time"
+              ></IonDatetime>
+            </IonItem>
+
+            <IonItem>
+              <IonInput
+                className="input"
+                label="Title: "
+                labelPlacement="floating"
+                placeholder="A description for you momemnt"
+                fill="outline"
+                counter={true}
+                maxlength={40}
+              ></IonInput>
+            </IonItem>
+
+            <IonItem>
+              <IonTextarea
+                className="input"
+                placeholder="Write all you want!"
+                label="Description:"
+                labelPlacement="floating"
+                rows={10}
+                fill="outline"
+              ></IonTextarea>
+            </IonItem>
 
             <IonList className="form-actions" lines="none">
               <IonItem>
@@ -52,13 +70,7 @@ const AddPage: React.FC = () => {
                 <IonIcon icon={mic}></IonIcon>
               </IonItem>
               <IonItem>
-                <IonIcon icon={text}></IonIcon>
-              </IonItem>
-              <IonItem>
                 <IonIcon icon={happy}></IonIcon>
-              </IonItem>
-              <IonItem>
-                <IonIcon icon={attach}></IonIcon>
               </IonItem>
               <IonItem>
                 <IonIcon icon={camera}></IonIcon>
