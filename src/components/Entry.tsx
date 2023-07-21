@@ -9,11 +9,11 @@ import React from "react";
 
 import "./styles/Entry.css";
 
-const Entry: React.FC<any> = ({ entry }) => {
+const Entry: React.FC<any> = ({ entry, onClick }) => {
   const { title, description, date, mood } = entry;
 
   return (
-    <IonCard>
+    <IonCard onClick={onClick}>
       <IonCardHeader>
         <IonCardTitle>{title}</IonCardTitle>
         <IonCardSubtitle>{date}</IonCardSubtitle>
