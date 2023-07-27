@@ -1,52 +1,58 @@
+import React, { useState } from "react";
 import {
+  IonModal,
+  IonHeader,
+  IonToolbar,
+  IonContent,
   IonButton,
   IonButtons,
-  IonContent,
-  IonDatetime,
-  IonHeader,
   IonIcon,
+  IonDatetime,
   IonInput,
   IonItem,
   IonList,
-  IonPage,
   IonTextarea,
-  IonToolbar,
+  IonDatetimeButton,
 } from "@ionic/react";
-import HeaderScreen from "../components/HeaderScreen";
+import { camera, chevronBackOutline, happy, image, mic } from "ionicons/icons";
+import HeaderScreen from "./HeaderScreen";
 
-import {
-  camera,
-  chevronBackOutline,
-  happy,
-  image,
-  mic,
-} from "ionicons/icons";
+interface AddEntryModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
 
-import "./styles/AddPage.css";
+const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
+  // TODO: Change for Entry object to save in Firebase
+  const handleSave = (id: number) => {
+    console.log(`Saving entry ${id}`);
+  };
 
-// TODO: Delete this page. REPLACED by modal
-
-const AddPage: React.FC = () => {
-  const handleSave = (entry: any) => {
-    console.log(entry);
+  const handleAddImage = () => {
+    console.log("Picking image");
+  };
+  const handleRecordDescription = () => {
+    console.log("Recording");
+  };
+  const handleAddMood = () => {
+    console.log("Picking mood");
+  };
+  const handleTextRecognition = () => {
+    console.log("Text Recognition...");
   };
 
   return (
-    <IonPage>
+    <IonModal isOpen={isOpen} onDidDismiss={onClose}>
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonButton
-              color="medium"
-              // TODO: Navigate back or Change to a modal
-              // onClick={() => navigate("/home/diary")}
-            >
+            <IonButton color="medium" onClick={onClose}>
               <IonIcon icon={chevronBackOutline}></IonIcon>
             </IonButton>
           </IonButtons>
           <IonButtons slot="end">
             <IonButton
-              onClick={() => handleSave("")}
+              onClick={() => handleSave(1)}
               strong={true}
               color="primary"
             >
@@ -62,10 +68,10 @@ const AddPage: React.FC = () => {
 
           <IonList>
             <IonItem>
-              <IonDatetime
-                placeholder="Seleccione una fecha"
-                presentation="date-time"
-              ></IonDatetime>
+              <IonDatetimeButton datetime="datetime"></IonDatetimeButton>
+              <IonModal keepContentsMounted={true}>
+                <IonDatetime id="datetime"></IonDatetime>
+              </IonModal>
             </IonItem>
 
             <IonItem>
@@ -93,23 +99,26 @@ const AddPage: React.FC = () => {
 
             <IonList className="form-actions" lines="none">
               <IonItem>
-                <IonIcon icon={image}></IonIcon>
+                <IonIcon icon={image} onClick={handleAddImage}></IonIcon>
               </IonItem>
               <IonItem>
-                <IonIcon icon={mic}></IonIcon>
+                <IonIcon icon={mic} onClick={handleRecordDescription}></IonIcon>
               </IonItem>
               <IonItem>
-                <IonIcon icon={happy}></IonIcon>
+                <IonIcon icon={happy} onClick={handleAddMood}></IonIcon>
               </IonItem>
               <IonItem>
-                <IonIcon icon={camera}></IonIcon>
+                <IonIcon
+                  icon={camera}
+                  onClick={handleTextRecognition}
+                ></IonIcon>
               </IonItem>
             </IonList>
           </IonList>
         </div>
       </IonContent>
-    </IonPage>
+    </IonModal>
   );
 };
 
-export default AddPage;
+export default AddEntryModal;

@@ -12,6 +12,7 @@ import {
   IonItem,
   IonList,
   IonTextarea,
+  IonDatetimeButton,
 } from "@ionic/react";
 import { chevronBackOutline, pencilOutline, trash } from "ionicons/icons";
 
@@ -75,7 +76,13 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
           </IonItem>
         </IonList>
 
-        <IonDatetime presentation="date-time" />
+        {/* TODO: Improve styles */}
+        <IonItem>
+          <IonDatetimeButton datetime="datetime"></IonDatetimeButton>
+          <IonModal keepContentsMounted={true}>
+            <IonDatetime id="datetime" disabled={!isEditing}></IonDatetime>
+          </IonModal>
+        </IonItem>
 
         <IonItem>
           <IonInput value={entry.title} disabled={!isEditing}></IonInput>

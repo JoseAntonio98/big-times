@@ -20,6 +20,8 @@ import MediaPage from "./SettingsPage";
 
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../FirebaseConfig";
+import { useState } from "react";
+import AddEntryModal from "../components/AddEntryModal";
 
 const HomePage: React.FC = () => {
   onAuthStateChanged(auth, (user) => {
@@ -29,6 +31,13 @@ const HomePage: React.FC = () => {
       console.log("Debe iniciar sesión");
     }
   });
+
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => {
+    setShowModal(true);
+    console.log("clicked")
+  };
 
   return (
     <IonPage>
@@ -64,8 +73,15 @@ const HomePage: React.FC = () => {
               <IonIcon aria-hidden="true" icon={calendar} />
               <IonLabel>Calendar</IonLabel>
             </IonTabButton>
-            <IonTabButton tab="add" href="/home/add">
+            {/* <IonTabButton tab="add" href="/home/add">
               <IonFab>
+                <IonFabButton size="small">
+                  <IonIcon icon={add}></IonIcon>
+                </IonFabButton>
+              </IonFab>
+            </IonTabButton> */}
+            <IonTabButton>
+              <IonFab onClick={openModal}>
                 <IonFabButton size="small">
                   <IonIcon icon={add}></IonIcon>
                 </IonFabButton>
@@ -81,6 +97,8 @@ const HomePage: React.FC = () => {
             </IonTabButton>
           </IonTabBar>
         </IonTabs>
+
+        <AddEntryModal isOpen={showModal} onClose={() => setShowModal(false)} />
       </IonReactRouter>
     </IonPage>
   );
