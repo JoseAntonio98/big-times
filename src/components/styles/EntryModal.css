@@ -1,0 +1,8 @@
+.edit-options {
+    display: flex;
+    
+}
+
+.edit-option:nth-child(1) {
+    margin-left: auto;
+}
