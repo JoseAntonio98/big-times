@@ -13,6 +13,7 @@ import {
   cloudOutline,
   colorPaletteOutline,
   keyOutline,
+  language,
   logOutOutline,
   notificationsOutline,
   trashBinOutline,
@@ -26,6 +27,10 @@ const SettingsPage: React.FC = () => {
         <div className="custom-sp-container">
           <h1 className="custom-sp-title">Personal</h1>
           <div>
+            <IonItem>
+              <IonIcon icon={language} slot="start"></IonIcon>
+              <IonToggle>Change to Spanish</IonToggle>
+            </IonItem>
             <IonItem detail={true}>
               <IonIcon icon={keyOutline} slot="start"></IonIcon>
               <IonLabel>Password (PIN)</IonLabel>
