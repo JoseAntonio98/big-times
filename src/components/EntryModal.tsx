@@ -17,6 +17,7 @@ import {
 import { chevronBackOutline, pencilOutline, trash } from "ionicons/icons";
 
 import "./styles/EntryModal.css";
+import EntryAdvice from "./EntryAdvice";
 
 interface EntryModalProps {
   isOpen: boolean;
@@ -85,7 +86,11 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
         </IonItem>
 
         <IonItem>
-          <IonInput value={entry.title} disabled={!isEditing}></IonInput>
+          <IonInput
+            value={entry.title}
+            disabled={!isEditing}
+            className="custom"
+          ></IonInput>
         </IonItem>
 
         <IonItem>
@@ -93,8 +98,11 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
             value={entry.description}
             rows={10}
             disabled={!isEditing}
+            className="custom"
           ></IonTextarea>
         </IonItem>
+
+        <EntryAdvice />
       </IonContent>
     </IonModal>
   );
