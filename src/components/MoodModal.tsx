@@ -11,7 +11,7 @@ interface MoodModalProps {
 
 const MoodModal: React.FC<MoodModalProps> = ({ isOpen, onClose }) => {
   return (
-    <IonModal isOpen={isOpen} onDidDismiss={onClose}>
+    <IonModal isOpen={isOpen} onDidDismiss={onClose} className="custom-modal">
       <div className="block">
         <HeaderScreen title="How are you?"></HeaderScreen>
         <div className="moods">

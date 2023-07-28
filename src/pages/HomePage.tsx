@@ -32,11 +32,14 @@ const HomePage: React.FC = () => {
     }
   });
 
-  const [showModal, setShowModal] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
 
-  const openModal = () => {
-    setShowModal(true);
-    console.log("clicked");
+  const openAddModal = () => {
+    setShowAddModal(true);
+  };
+
+  const closeAddModal = () => {
+    setShowAddModal(false);
   };
 
   return (
@@ -81,7 +84,7 @@ const HomePage: React.FC = () => {
               </IonFab>
             </IonTabButton> */}
             <IonTabButton>
-              <IonFab onClick={openModal}>
+              <IonFab onClick={openAddModal}>
                 <IonFabButton size="small">
                   <IonIcon icon={add}></IonIcon>
                 </IonFabButton>
@@ -98,7 +101,13 @@ const HomePage: React.FC = () => {
           </IonTabBar>
         </IonTabs>
 
-        <AddEntryModal isOpen={showModal} onClose={() => setShowModal(false)} />
+        {showAddModal && (
+          <AddEntryModal
+            isOpen={showAddModal}
+            onClose={() => closeAddModal()}
+          />
+        )}
+        {/* <AddEntryModal isOpen={showAddModal} onClose={() => setShowAddModal(false)} /> */}
       </IonReactRouter>
     </IonPage>
   );

@@ -7,11 +7,19 @@
   justify-content: center;
 }
 
-ion-modal {
+.custom-modal {
+  margin: auto;
+  height: 250px;
+  width: 82%;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 0 0 var(--ion-color-medium-tint);
+}
+
+/* ion-modal {
   --height: auto;
   --width: 80%;
   --border-radius: 0.5rem;
-}
+} */
 
 .moods {
   display: flex;

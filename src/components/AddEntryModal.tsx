@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   IonModal,
   IonHeader,
@@ -18,6 +18,7 @@ import { camera, chevronBackOutline, happy, image, mic } from "ionicons/icons";
 import HeaderScreen from "./HeaderScreen";
 
 import "./styles/AddEntryModal.css";
+import MoodModal from "./MoodModal";
 
 interface AddEntryModalProps {
   isOpen: boolean;
@@ -25,6 +26,15 @@ interface AddEntryModalProps {
 }
 
 const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
+  const [showMoodModal, setShowMoodModal] = useState(false);
+
+  const openMoodModal = () => {
+    setShowMoodModal(true);
+  };
+  const closeMoodModal = () => {
+    setShowMoodModal(false);
+  };
+
   // TODO: Change for Entry object to save in Firebase
   const handleSave = (id: number) => {
     console.log(`Saving entry ${id}`);
@@ -68,7 +78,7 @@ const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
         <div style={{ padding: "1rem" }}>
           <HeaderScreen title="Write an entry" />
 
-          <IonItem style={{"marginLeft": "-1rem"}}>
+          <IonItem style={{ marginLeft: "-1rem" }}>
             <IonDatetimeButton
               datetime="datetime"
               className="ion-margin-bottom ion-margin-top"
@@ -106,7 +116,7 @@ const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
               <IonIcon icon={mic} onClick={handleRecordDescription}></IonIcon>
             </IonItem>
             <IonItem>
-              <IonIcon icon={happy} onClick={handleAddMood}></IonIcon>
+              <IonIcon icon={happy} onClick={openMoodModal}></IonIcon>
             </IonItem>
             <IonItem>
               <IonIcon icon={camera} onClick={handleTextRecognition}></IonIcon>
@@ -114,6 +124,10 @@ const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
           </IonList>
         </div>
       </IonContent>
+
+      {showMoodModal && (
+        <MoodModal isOpen={showMoodModal} onClose={() => closeMoodModal()} />
+      )}
     </IonModal>
   );
 };
