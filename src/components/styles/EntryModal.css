@@ -1,9 +1,14 @@
 .edit-options {
   display: flex;
+  align-items: center;
 }
 
 .edit-option:nth-child(1) {
   margin-left: auto;
+}
+
+.edit-option {
+  border-bottom-color: #fff;
 }
 
 /* ion-textarea.custom {

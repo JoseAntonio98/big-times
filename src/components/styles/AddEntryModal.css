@@ -1,0 +1,19 @@
+.input {
+    margin-top: 1rem;
+  }
+  
+  .text-save {
+    font-family: "Montserrat";
+    text-transform: capitalize;
+  }
+  
+  .btn-save {
+    margin-top: 2rem;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  

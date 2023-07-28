@@ -14,7 +14,7 @@ import { IonReactRouter } from "@ionic/react-router";
 import { add, book, calendar, eye, settings } from "ionicons/icons";
 import DiaryPage from "./DiaryPage";
 import FavoritesPage from "./InsightsPage";
-import AddPage from "./AddPage";
+// import AddPage from "./backup/AddPage";
 import CalendarPage from "./CalendarPage";
 import MediaPage from "./SettingsPage";
 
@@ -50,9 +50,9 @@ const HomePage: React.FC = () => {
             <Route exact path="/home/calendar">
               <CalendarPage />
             </Route>
-            <Route path="/home/add">
+            {/* <Route path="/home/add">
               <AddPage />
-            </Route>
+            </Route> */}
             <Route exact path="/home/insights">
               <FavoritesPage />
             </Route>

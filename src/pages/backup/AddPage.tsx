@@ -12,7 +12,7 @@ import {
   IonTextarea,
   IonToolbar,
 } from "@ionic/react";
-import HeaderScreen from "../components/HeaderScreen";
+import HeaderScreen from "../../components/HeaderScreen";
 
 import {
   camera,
@@ -22,7 +22,7 @@ import {
   mic,
 } from "ionicons/icons";
 
-import "./styles/AddPage.css";
+import "./AddPage.css";
 
 // TODO: Delete this page. REPLACED by modal
 

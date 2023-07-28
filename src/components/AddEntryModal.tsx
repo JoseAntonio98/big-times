@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   IonModal,
   IonHeader,
@@ -16,6 +16,8 @@ import {
 } from "@ionic/react";
 import { camera, chevronBackOutline, happy, image, mic } from "ionicons/icons";
 import HeaderScreen from "./HeaderScreen";
+
+import "./styles/AddEntryModal.css";
 
 interface AddEntryModalProps {
   isOpen: boolean;
@@ -63,57 +65,52 @@ const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
       </IonHeader>
 
       <IonContent fullscreen className="ion-padding">
-        <div>
+        <div style={{ padding: "1rem" }}>
           <HeaderScreen title="Write an entry" />
 
-          <IonList>
-            <IonItem>
-              <IonDatetimeButton datetime="datetime"></IonDatetimeButton>
-              <IonModal keepContentsMounted={true}>
-                <IonDatetime id="datetime"></IonDatetime>
-              </IonModal>
-            </IonItem>
+          <IonItem style={{"marginLeft": "-1rem"}}>
+            <IonDatetimeButton
+              datetime="datetime"
+              className="ion-margin-bottom ion-margin-top"
+            ></IonDatetimeButton>
+          </IonItem>
+          <IonModal keepContentsMounted={true}>
+            <IonDatetime id="datetime"></IonDatetime>
+          </IonModal>
 
-            <IonItem>
-              <IonInput
-                className="input"
-                label="Title: "
-                labelPlacement="floating"
-                placeholder="A description for you momemnt"
-                fill="outline"
-                counter={true}
-                maxlength={40}
-              ></IonInput>
-            </IonItem>
+          <IonInput
+            className="ion-margin-bottom"
+            label="Title: "
+            labelPlacement="floating"
+            placeholder="A description for you momemnt"
+            fill="outline"
+            counter={true}
+            maxlength={40}
+            clearInput={true}
+          ></IonInput>
 
-            <IonItem>
-              <IonTextarea
-                className="input"
-                placeholder="Write all you want!"
-                label="Description:"
-                labelPlacement="floating"
-                rows={10}
-                fill="outline"
-              ></IonTextarea>
-            </IonItem>
+          <IonTextarea
+            className="ion-margin-bottom"
+            placeholder="Write all you want!"
+            label="Description:"
+            labelPlacement="floating"
+            rows={10}
+            fill="outline"
+          ></IonTextarea>
 
-            <IonList className="form-actions" lines="none">
-              <IonItem>
-                <IonIcon icon={image} onClick={handleAddImage}></IonIcon>
-              </IonItem>
-              <IonItem>
-                <IonIcon icon={mic} onClick={handleRecordDescription}></IonIcon>
-              </IonItem>
-              <IonItem>
-                <IonIcon icon={happy} onClick={handleAddMood}></IonIcon>
-              </IonItem>
-              <IonItem>
-                <IonIcon
-                  icon={camera}
-                  onClick={handleTextRecognition}
-                ></IonIcon>
-              </IonItem>
-            </IonList>
+          <IonList className="form-actions" lines="none">
+            <IonItem>
+              <IonIcon icon={image} onClick={handleAddImage}></IonIcon>
+            </IonItem>
+            <IonItem>
+              <IonIcon icon={mic} onClick={handleRecordDescription}></IonIcon>
+            </IonItem>
+            <IonItem>
+              <IonIcon icon={happy} onClick={handleAddMood}></IonIcon>
+            </IonItem>
+            <IonItem>
+              <IonIcon icon={camera} onClick={handleTextRecognition}></IonIcon>
+            </IonItem>
           </IonList>
         </div>
       </IonContent>

@@ -18,6 +18,7 @@ import { chevronBackOutline, pencilOutline, trash } from "ionicons/icons";
 
 import "./styles/EntryModal.css";
 import EntryAdvice from "./EntryAdvice";
+import HeaderScreen from "./HeaderScreen";
 
 interface EntryModalProps {
   isOpen: boolean;
@@ -78,29 +79,31 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
         </IonList>
 
         {/* TODO: Improve styles */}
-        <IonItem>
-          <IonDatetimeButton datetime="datetime"></IonDatetimeButton>
-          <IonModal keepContentsMounted={true}>
-            <IonDatetime id="datetime" disabled={!isEditing}></IonDatetime>
-          </IonModal>
-        </IonItem>
+        <IonList>
+          <IonItem>
+            <IonDatetimeButton datetime="datetime"></IonDatetimeButton>
+          </IonItem>
+            <IonModal keepContentsMounted={true}>
+              <IonDatetime id="datetime" disabled={!isEditing}></IonDatetime>
+            </IonModal>
 
-        <IonItem>
-          <IonInput
-            value={entry.title}
-            disabled={!isEditing}
-            className="custom"
-          ></IonInput>
-        </IonItem>
+          <IonItem>
+            <IonInput
+              value={entry.title}
+              disabled={!isEditing}
+              className="custom"
+            ></IonInput>
+          </IonItem>
 
-        <IonItem>
-          <IonTextarea
-            value={entry.description}
-            rows={10}
-            disabled={!isEditing}
-            className="custom"
-          ></IonTextarea>
-        </IonItem>
+          <IonItem>
+            <IonTextarea
+              value={entry.description}
+              rows={10}
+              disabled={!isEditing}
+              className="custom"
+            ></IonTextarea>
+          </IonItem>
+        </IonList>
 
         <EntryAdvice />
       </IonContent>
