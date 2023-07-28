@@ -20,8 +20,8 @@ const Entry: React.FC<any> = ({ entry, onClick }) => {
         {mood ? (
           <div
             style={{
-              width: "16px",
-              height: "16px",
+              width: "24px",
+              height: "24px",
               backgroundColor:
                 mood == "happy"
                   ? "var(--ion-color-success)"
@@ -32,8 +32,18 @@ const Entry: React.FC<any> = ({ entry, onClick }) => {
               right: "8px",
               top: "8px",
               borderRadius: "50%",
+              display: "flex",
+              justifyContent: "center",
             }}
-          ></div>
+          >
+            {mood == "happy" ? (
+              <span className="emoji-small">&#128512;</span>
+            ) : mood == "angry" ? (
+              <span className="emoji-small">&#128544;</span>
+            ) : mood == "sad" ? (
+              <span className="emoji-small">&#128546;</span>
+            ) : null}
+          </div>
         ) : null}
       </IonCardHeader>
 

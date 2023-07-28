@@ -16,13 +16,13 @@ const MoodModal: React.FC<MoodModalProps> = ({ isOpen, onClose }) => {
         <HeaderScreen title="How are you?"></HeaderScreen>
         <div className="moods">
           <div className="mood mood-angry">
-            <span className="emoji">&#128544;</span>
+            <span className="emoji-large">&#128544;</span>
           </div>
           <div className="mood mood-happy">
-            <span className="emoji">&#128512;</span>
+            <span className="emoji-large">&#128512;</span>
           </div>
           <div className="mood mood-sad">
-            <span className="emoji">&#128546;</span>
+            <span className="emoji-large">&#128546;</span>
           </div>
         </div>
         <div className="btns">
