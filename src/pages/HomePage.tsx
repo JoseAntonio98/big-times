@@ -36,7 +36,7 @@ const HomePage: React.FC = () => {
 
   const openModal = () => {
     setShowModal(true);
-    console.log("clicked")
+    console.log("clicked");
   };
 
   return (
