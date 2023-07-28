@@ -7,9 +7,9 @@ import {
 } from "@ionic/react";
 import React from "react";
 
-import "./styles/Entry.css";
+import "./styles/EntryCard.css";
 
-const Entry: React.FC<any> = ({ entry, onClick }) => {
+const EntryCard: React.FC<any> = ({ entry, onClick }) => {
   const { title, description, date, mood } = entry;
 
   return (
@@ -19,22 +19,15 @@ const Entry: React.FC<any> = ({ entry, onClick }) => {
         <IonCardSubtitle>{date}</IonCardSubtitle>
         {mood ? (
           <div
-            style={{
-              width: "24px",
-              height: "24px",
-              backgroundColor:
-                mood == "happy"
-                  ? "var(--ion-color-success)"
-                  : mood == "angry"
-                  ? "var(--ion-color-danger)"
-                  : "var(--ion-color-tertiary)",
-              position: "absolute",
-              right: "8px",
-              top: "8px",
-              borderRadius: "50%",
-              display: "flex",
-              justifyContent: "center",
-            }}
+            className="mood-ctn"
+            // style={{
+            //   backgroundColor:
+            //     mood == "happy"
+            //       ? "var(--ion-color-success)"
+            //       : mood == "angry"
+            //       ? "var(--ion-color-danger)"
+            //       : "var(--ion-color-tertiary)",
+            // }}
           >
             {mood == "happy" ? (
               <span className="emoji-small">&#128512;</span>
@@ -52,4 +45,4 @@ const Entry: React.FC<any> = ({ entry, onClick }) => {
   );
 };
 
-export default Entry;
+export default EntryCard;

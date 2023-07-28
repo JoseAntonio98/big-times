@@ -25,11 +25,11 @@ const MoodModal: React.FC<MoodModalProps> = ({ isOpen, onClose }) => {
             <span className="emoji-large">&#128546;</span>
           </div>
         </div>
-        <div className="btns">
-          <IonButton onClick={onClose} className="btn" color="light">
+        <div className="mood-btns">
+          <IonButton onClick={onClose} className="mood-btn" color="light">
             Cancel
           </IonButton>
-          <IonButton className="btn" color="primary">
+          <IonButton className="mood-btn" color="primary">
             Save
           </IonButton>
         </div>

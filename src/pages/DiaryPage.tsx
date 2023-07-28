@@ -6,7 +6,7 @@ import { auth } from "../FirebaseConfig";
 import EntryModal from "../components/EntryModal";
 import DayMessage from "../components/DayMessage";
 import DiaryEmpty from "../components/DiaryEmpty";
-import Entry from "../components/Entry";
+import EntryCard from "../components/EntryCard";
 import HeaderScreen from "../components/HeaderScreen";
 import { entries } from "../data/fake-data";
 
@@ -32,7 +32,7 @@ const DiaryPage: React.FC = () => {
         {entries ? (
           <div style={{ marginTop: "2rem" }}>
             {entries.map((entry) => (
-              <Entry
+              <EntryCard
                 key={entry.id}
                 entry={entry}
                 onClick={() => handleItemClick(entry)}

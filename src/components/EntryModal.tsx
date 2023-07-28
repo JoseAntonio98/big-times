@@ -14,11 +14,20 @@ import {
   IonTextarea,
   IonDatetimeButton,
 } from "@ionic/react";
-import { chevronBackOutline, pencilOutline, trash } from "ionicons/icons";
+import {
+  camera,
+  chevronBackOutline,
+  happy,
+  image,
+  mic,
+  pencilOutline,
+  trash,
+} from "ionicons/icons";
 
 import "./styles/EntryModal.css";
 import EntryAdvice from "./EntryAdvice";
 import HeaderScreen from "./HeaderScreen";
+import MoodModal from "./MoodModal";
 
 interface EntryModalProps {
   isOpen: boolean;
@@ -29,6 +38,15 @@ interface EntryModalProps {
 const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
   const { id, title, description, date, mood } = entry;
   const [isEditing, setIsEditing] = useState(false);
+
+  const [showMoodModal, setShowMoodModal] = useState(false);
+
+  const openMoodModal = () => {
+    setShowMoodModal(true);
+  };
+  const closeMoodModal = () => {
+    setShowMoodModal(false);
+  };
 
   const handleSave = (id: number) => {
     console.log(`Saving entry ${id}`);
@@ -59,23 +77,39 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        <IonList className="edit-options">
-          <IonItem className="edit-option">
-            <IonIcon
-              onClick={() => setIsEditing(!isEditing)}
-              icon={pencilOutline}
-              color="primary"
-              size="medium"
-            />
+        <IonList className="options">
+          <IonItem onClick={openMoodModal}>
+            {mood ? (
+              <div className="">
+                {mood == "happy" ? (
+                  <span className="emoji-small">&#128512;</span>
+                ) : mood == "angry" ? (
+                  <span className="emoji-small">&#128544;</span>
+                ) : mood == "sad" ? (
+                  <span className="emoji-small">&#128546;</span>
+                ) : null}
+              </div>
+            ) : null}
           </IonItem>
-          <IonItem className="edit-option">
-            <IonIcon
-              icon={trash}
-              color="danger"
-              size="medium"
-              onClick={() => handleDelete(id)}
-            />
-          </IonItem>
+
+          <div className="edit-options">
+            <IonItem className="edit-option">
+              <IonIcon
+                onClick={() => setIsEditing(!isEditing)}
+                icon={pencilOutline}
+                color="primary"
+                size="medium"
+              />
+            </IonItem>
+            <IonItem className="edit-option">
+              <IonIcon
+                icon={trash}
+                color="danger"
+                size="medium"
+                onClick={() => handleDelete(id)}
+              />
+            </IonItem>
+          </div>
         </IonList>
 
         {/* TODO: Improve styles */}
@@ -83,9 +117,9 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
           <IonItem>
             <IonDatetimeButton datetime="datetime"></IonDatetimeButton>
           </IonItem>
-            <IonModal keepContentsMounted={true}>
-              <IonDatetime id="datetime" disabled={!isEditing}></IonDatetime>
-            </IonModal>
+          <IonModal keepContentsMounted={true}>
+            <IonDatetime id="datetime" disabled={!isEditing}></IonDatetime>
+          </IonModal>
 
           <IonItem>
             <IonInput
@@ -106,7 +140,24 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
         </IonList>
 
         <EntryAdvice />
+
+        {/* TODO: Ver si van estas opciones | NO TAN IMPORTANTE */}
+        <IonList className="form-actions" lines="none">
+          <IonItem>
+            <IonIcon icon={image}></IonIcon>
+          </IonItem>
+          <IonItem>
+            <IonIcon icon={mic}></IonIcon>
+          </IonItem>
+          <IonItem>
+            <IonIcon icon={camera}></IonIcon>
+          </IonItem>
+        </IonList>
       </IonContent>
+
+      {showMoodModal && (
+        <MoodModal isOpen={showMoodModal} onClose={() => closeMoodModal()} />
+      )}
     </IonModal>
   );
 };

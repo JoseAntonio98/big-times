@@ -1,10 +1,15 @@
-.edit-options {
+.options {
   display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
-.edit-option:nth-child(1) {
+/* .edit-option:nth-child(1) {
   margin-left: auto;
+} */
+
+.edit-options {
+  display: flex;
 }
 
 .edit-option {
@@ -17,15 +22,15 @@
 } */
 
 /* ion-input.custom { */
-  /* --background: #373737; */
-  /* --color: #000; */
-  /* --placeholder-color: red; */
-  /* --placeholder-opacity: 0.8; */
+/* --background: #373737; */
+/* --color: #000; */
+/* --placeholder-color: red; */
+/* --placeholder-opacity: 0.8; */
 
-  /* --padding-bottom: 10px; */
-  /* --padding-end: 10px; */
-  /* --padding-start: 1rem; */
-  /* --padding-top: 10px; */
+/* --padding-bottom: 10px; */
+/* --padding-end: 10px; */
+/* --padding-start: 1rem; */
+/* --padding-top: 10px; */
 /* } */
 
 /* ion-input.custom .helper-text,

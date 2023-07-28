@@ -5,7 +5,7 @@ import { IonContent, IonDatetime, IonPage } from "@ionic/react";
 
 import CalendarEmpty from "../components/CalendarEmpty";
 import HeaderScreen from "../components/HeaderScreen";
-import Entry from "../components/Entry";
+import EntryCard from "../components/EntryCard";
 
 import "react-calendar/dist/Calendar.css";
 import "./styles/CalendarPage.css";
@@ -33,7 +33,7 @@ const CalendarPage: React.FC = () => {
         {entries ? (
           <div style={{ marginTop: "2rem" }}>
             {entries.map((entry) => (
-              <Entry
+              <EntryCard
                 key={entry.id}
                 entry={entry}
                 onClick={() => handleItemClick(entry)}
