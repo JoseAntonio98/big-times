@@ -14,6 +14,10 @@ import {
   IonList,
   IonTextarea,
   IonDatetimeButton,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonImg,
 } from "@ionic/react";
 import { useForm } from "react-hook-form";
 import { camera, chevronBackOutline, happy, image, mic } from "ionicons/icons";
@@ -24,6 +28,7 @@ import MoodModal from "./MoodModal";
 import { add_note } from "../Utilities/user_firestore";
 import { auth } from "../FirebaseConfig";
 import { useTranslation } from "react-i18next";
+import { usePhotoGallery } from "../Utilities/usePhotoGallery";
 
 interface AddEntryModalProps {
   isOpen: boolean;
@@ -35,12 +40,14 @@ const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
 
   const [showMoodModal, setShowMoodModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { photos, takePhoto } = usePhotoGallery()
   const { register, handleSubmit, setValue } = useForm({
     defaultValues: {
       title: "",
       description: "",
       date: new Date(),
       mood: "happy",
+      advice: "",
     },
   });
 
@@ -59,15 +66,17 @@ const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
       data.title,
       data.description,
       data.date,
-      data.mood
+      data.mood,
+      data.advice
     ).then(() => {
       setLoading(false);
       onClose();
     });
   });
 
-  const handleAddImage = () => {
+  const handleAddImage = async () => {
     console.log("Picking image");
+    await takePhoto()
   };
   const handleRecordDescription = () => {
     console.log("Recording");
@@ -169,6 +178,17 @@ const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
               <IonIcon icon={camera} onClick={handleTextRecognition}></IonIcon>
             </IonItem>
           </IonList>
+        </div>
+        <div>
+          <IonGrid>
+            <IonRow>
+              {photos.map( (photo, index ) => (
+                <IonCol size="4" key={photo.filepath}>
+                  <IonImg src={photo.webviewPath} />
+                </IonCol>
+              ))}
+            </IonRow>
+          </IonGrid>
         </div>
       </IonContent>
 
