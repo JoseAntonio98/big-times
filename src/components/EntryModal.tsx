@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  IonLoading,
   IonModal,
   IonHeader,
   IonToolbar,
@@ -26,8 +27,9 @@ import {
 
 import "./styles/EntryModal.css";
 import EntryAdvice from "./EntryAdvice";
-import HeaderScreen from "./HeaderScreen";
+import { useForm } from "react-hook-form";
 import MoodModal from "./MoodModal";
+import { delete_note, update_note } from "../Utilities/user_firestore";
 
 interface EntryModalProps {
   isOpen: boolean;
@@ -38,7 +40,14 @@ interface EntryModalProps {
 const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
   const { id, title, description, date, mood } = entry;
   const [isEditing, setIsEditing] = useState(false);
-
+  const [loading, setLoading] = useState(false)
+  const { register, handleSubmit, setValue } = useForm({
+    defaultValues: {
+      title:title,
+      description:description,
+      date: new Date(date.toDate()), 
+      mood:mood
+    }});
   const [showMoodModal, setShowMoodModal] = useState(false);
 
   const openMoodModal = () => {
@@ -48,13 +57,28 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
     setShowMoodModal(false);
   };
 
-  const handleSave = (id: number) => {
-    console.log(`Saving entry ${id}`);
+  const handleSaveData = handleSubmit( async (data) => {
+    //console.log(data);
+    await update_note(id, data.title, data.description, data.date, data.mood)
+    onClose()
+  });
+
+  const handleDelete = async (id: string) => {
+    setLoading(true)
+    console.log(`Deleting entry ${id}`);
+    await delete_note(id).then(()=>{
+      setLoading(false)
+      onClose()
+    })
   };
 
-  const handleDelete = (id: number) => {
-    console.log(`Deleting entry ${id}`);
-  };
+  if (loading) {
+    return <IonLoading
+      isOpen={loading}
+      onDidDismiss={() => setLoading(false)}
+      message={'Delete note...'}
+    />
+  }
 
   return (
     <IonModal isOpen={isOpen} onDidDismiss={onClose}>
@@ -67,9 +91,11 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
           </IonButtons>
           <IonButtons slot="end">
             <IonButton
-              onClick={() => handleSave(id)}
+              onClick={handleSaveData}
+              type="submit"
               strong={true}
               color="primary"
+              disabled={!isEditing}
             >
               Save
             </IonButton>
@@ -78,7 +104,7 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
       </IonHeader>
       <IonContent className="ion-padding">
         <IonList className="options">
-          <IonItem onClick={openMoodModal}>
+          <IonItem disabled={!isEditing} onClick={openMoodModal}>
             {mood ? (
               <div className="">
                 {mood == "happy" ? (
@@ -114,11 +140,14 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
 
         {/* TODO: Improve styles */}
         <IonList>
-          <IonItem>
+          <IonItem {...register("date", { valueAsDate: true })} >
             <IonDatetimeButton datetime="datetime"></IonDatetimeButton>
           </IonItem>
           <IonModal keepContentsMounted={true}>
-            <IonDatetime id="datetime" disabled={!isEditing}></IonDatetime>
+            <IonDatetime id="datetime" disabled={!isEditing}
+            onIonChange={(data: any) => {
+              setValue("date", data.detail.value);
+            }} ></IonDatetime>
           </IonModal>
 
           <IonItem>
@@ -126,6 +155,7 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
               value={title}
               disabled={!isEditing}
               className="custom"
+              {...register("title")}
             ></IonInput>
           </IonItem>
 
@@ -135,6 +165,7 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
               rows={10}
               disabled={!isEditing}
               className="custom"
+              {...register("description")}
             ></IonTextarea>
           </IonItem>
         </IonList>
