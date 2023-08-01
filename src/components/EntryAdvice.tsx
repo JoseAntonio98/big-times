@@ -9,20 +9,17 @@ import "./styles/DayMessage.css";
 
 interface EntryAdviceProps {
   title: string;
+  message: string;
 }
 
 // ChatGPT advice based on description entry
-const EntryAdvice: React.FC<EntryAdviceProps> = ({ title }) => {
+const EntryAdvice: React.FC<EntryAdviceProps> = ({ title, message }) => {
   return (
     <IonCard color="primary" className="ion-margin">
       <IonCardHeader>
         <IonCardTitle className="ion-text-center">{title}</IonCardTitle>
       </IonCardHeader>
-      <IonCardContent className="custom-dm-message">
-        Here will be a AI message according the last user entry. For example:
-        "You are capable of greatness. Believe in yourself. Embrace challenges
-        as opportunities. Stay determined and persevere."
-      </IonCardContent>
+      <IonCardContent className="custom-dm-message">{message}</IonCardContent>
     </IonCard>
   );
 };

@@ -16,6 +16,16 @@
   border-bottom-color: #fff;
 }
 
+.advice-ctn {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.advice-ctn-title {
+  margin-bottom: 1rem;
+  color: var(--ion-color-dark-tint);
+}
+
 /* ion-textarea.custom {
   --padding-start: 1rem;
   --color: #000;

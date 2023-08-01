@@ -42,5 +42,9 @@
   "backupOption": "Respaldo & Restauración",
   "deleteDataOption": "Borrar datos de la aplicación",
   "sessionTitle": "SESIÓN",
-  "logoutOption": "Cerrar sesión"
+  "logoutOption": "Cerrar sesión",
+
+  "aiError": "Algo salió mal. Intente más tarde",
+  "adviceQuestion": "¿Quieres un consejo por IA?",
+  "adviceButton": "Obtener consejo"
 }

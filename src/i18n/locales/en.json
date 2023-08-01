@@ -42,5 +42,9 @@
   "backupOption": "Backup & Restore",
   "deleteDataOption": "Delete app data",
   "sessionTitle": "SESSION",
-  "logoutOption": "Logout"
+  "logoutOption": "Logout",
+
+  "aiError": "Something went wrong. Try it later",
+  "adviceQuestion": "Do you want an IA advice?",
+  "adviceButton": "Get an Advice"
 }

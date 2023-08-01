@@ -14,16 +14,19 @@ import {
   IonList,
   IonTextarea,
   IonDatetimeButton,
+  IonSpinner,
 } from "@ionic/react";
 import {
   camera,
   chevronBackOutline,
-  happy,
   image,
   mic,
   pencilOutline,
   trash,
 } from "ionicons/icons";
+
+import { OPENAI_API_KEY } from "../openaiConfig";
+import { OpenAIApi, Configuration } from "openai";
 
 import "./styles/EntryModal.css";
 import EntryAdvice from "./EntryAdvice";
@@ -74,6 +77,43 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
       setLoading(false);
       onClose();
     });
+  };
+
+  // CHATGPT Configuration
+  const configuration = new Configuration({
+    apiKey: OPENAI_API_KEY,
+  });
+  const openai = new OpenAIApi(configuration);
+
+  // TODO: CARGAR INICIALMENTE CON EL VALOR GUARDADO EN LA BASE DE DATOS SI TUVIESE, CASO CONTRARIO VACIO
+  const [advice, setAdvice] = useState("");
+  const [adviceLoading, setAdviceLoading] = useState(false);
+
+  const generateAdvice = async () => {
+    setAdviceLoading(true);
+
+    try {
+      const response = await openai.createChatCompletion({
+        model: "gpt-3.5-turbo",
+        messages: [
+          {
+            role: "user",
+            content: `Genera un consejo motivacional conciso, de máximo 50 tokens, y completo para el siguiente contexto ${description}`,
+          },
+        ],
+        max_tokens: 50,
+      });
+
+      const adviceByAi = response.data.choices[0].message?.content;
+      console.log(response);
+      console.log(adviceByAi);
+
+      setAdvice(adviceByAi || "");
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (loading) {
@@ -180,8 +220,6 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
           </IonItem>
         </IonList>
 
-        <EntryAdvice title={t("entryIaTipTitle")} />
-
         {/* TODO: Ver si van estas opciones | NO TAN IMPORTANTE */}
         <IonList className="form-actions" lines="none">
           <IonItem>
@@ -194,6 +232,27 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
             <IonIcon icon={camera}></IonIcon>
           </IonItem>
         </IonList>
+
+        {advice.length === 0 ? (
+          <div className="advice-ctn">
+            {adviceLoading ? (
+              <IonSpinner />
+            ) : (
+              <div>
+                <p className="advice-ctn-title">{t("adviceQuestion")}</p>
+                <IonButton
+                  fill="outline"
+                  color="primary"
+                  onClick={generateAdvice}
+                >
+                  {t("adviceButton")}
+                </IonButton>
+              </div>
+            )}
+          </div>
+        ) : (
+          <EntryAdvice title={t("entryIaTipTitle")} message={advice} />
+        )}
       </IonContent>
 
       {showMoodModal && (
