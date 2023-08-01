@@ -1,30 +1,31 @@
+import React, { useEffect } from "react";
+import { Redirect, useHistory } from "react-router-dom";
+import { auth, providerGoogle } from "../FirebaseConfig";
 import { IonButton, IonContent, IonIcon, IonPage, IonText } from "@ionic/react";
 import { logoGoogle, logoApple } from "ionicons/icons";
-import React from "react";
-import { useHistory } from "react-router-dom";
-
-import { auth, providerGoogle } from "../FirebaseConfig";
-
+import {
+  signInWithRedirect,
+  onAuthStateChanged,
+  getRedirectResult,
+} from "firebase/auth";
 import WelcomeImage from "../assets/bigtimes.png";
 import "./styles/LoginPage.css";
-import { signInWithRedirect, onAuthStateChanged } from "firebase/auth";
 
 const LoginPage: React.FC = () => {
-  let history = useHistory();
+  const history = useHistory();
+
+  const handleLogin = async () => {
+    await signInWithRedirect(auth, providerGoogle);
+  };
+
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      //const uid = user.uid;
       history.push("/home");
     } else {
-      console.log("Debe iniciar sesión");
-      history.push("/login");
+      console.log("Debe iniciar sesión");      
     }
   });
-
-  const handleLogin = () => {
-    signInWithRedirect(auth, providerGoogle);
-  };
 
   return (
     <IonPage>

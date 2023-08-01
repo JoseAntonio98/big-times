@@ -1,23 +1,8 @@
-import {
-  IonContent,
-  IonIcon,
-  IonItem,
-  IonLabel,
-  IonPage,
-  IonToggle,
-} from "@ionic/react";
+import { IonButton, IonContent, IonIcon, IonItem, IonLabel, IonPage, IonToggle } from "@ionic/react";
+import { cloudOutline, colorPaletteOutline, keyOutline, language, logOutOutline, notificationsOutline, trashBinOutline } from "ionicons/icons";
 import HeaderScreen from "../components/HeaderScreen";
-
+import { logout } from "../Utilities/user_firestore";
 import "./styles/SettingsPage.css";
-import {
-  cloudOutline,
-  colorPaletteOutline,
-  keyOutline,
-  language,
-  logOutOutline,
-  notificationsOutline,
-  trashBinOutline,
-} from "ionicons/icons";
 
 const SettingsPage: React.FC = () => {
   return (
@@ -63,7 +48,7 @@ const SettingsPage: React.FC = () => {
         <div className="custom-sp-container">
           <h1 className="custom-sp-title">Session</h1>
           <div>
-            <IonItem detail={true}>
+            <IonItem onClick={logout} detail={true}>
               <IonIcon icon={logOutOutline} slot="start"></IonIcon>
               <IonLabel>Logout</IonLabel>
             </IonItem>
