@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { IonContent, IonDatetime, IonPage } from "@ionic/react";
+import { useState, useEffect } from "react";
+import { IonLoading, IonContent, IonDatetime, IonPage } from "@ionic/react";
 
 // import Calendar from "react-calendar";
 
@@ -11,9 +11,15 @@ import "react-calendar/dist/Calendar.css";
 import "./styles/CalendarPage.css";
 import { entries } from "../data/fake-data";
 import EntryModal from "../components/EntryModal";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { auth, db } from "../FirebaseConfig";
+import { get_notes } from "../Utilities/user_firestore";
 
 const CalendarPage: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<any | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [entries, setEntries] = useState([{}])
+  const user = auth.currentUser;
 
   const handleItemClick = (item: any) => {
     setSelectedItem(item);
@@ -22,6 +28,26 @@ const CalendarPage: React.FC = () => {
   const handleCloseModal = () => {
     setSelectedItem(null);
   };
+
+  const getEntries = async () => {
+    const data = await get_notes(user!.uid)
+    setEntries(data.docs.map( (doc) => ({
+      ...doc.data()
+    })))
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    getEntries()
+  }, [])
+
+  if (loading) {
+    return <IonLoading
+      isOpen={loading}
+      onDidDismiss={() => setLoading(false)}
+      message={'Get notes...'}
+    />
+  }
 
   return (
     <IonPage>
@@ -32,9 +58,9 @@ const CalendarPage: React.FC = () => {
 
         {entries ? (
           <div style={{ marginTop: "2rem" }}>
-            {entries.map((entry) => (
+            {entries.map((entry, index: number) => (
               <EntryCard
-                key={entry.id}
+                key={index}
                 entry={entry}
                 onClick={() => handleItemClick(entry)}
               />

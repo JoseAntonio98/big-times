@@ -14,11 +14,15 @@ import {
   IonTextarea,
   IonDatetimeButton,
 } from "@ionic/react";
+import { useForm } from "react-hook-form";
 import { camera, chevronBackOutline, happy, image, mic } from "ionicons/icons";
 import HeaderScreen from "./HeaderScreen";
 
 import "./styles/AddEntryModal.css";
 import MoodModal from "./MoodModal";
+import { add_note } from "../Utilities/user_firestore";
+import { auth } from "../FirebaseConfig";
+import myToast from "../Utilities/myToast";
 
 interface AddEntryModalProps {
   isOpen: boolean;
@@ -26,7 +30,9 @@ interface AddEntryModalProps {
 }
 
 const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
+  
   const [showMoodModal, setShowMoodModal] = useState(false);
+  const { register, handleSubmit, setValue } = useForm({defaultValues: {title:"", description:"",date: new Date(), mood:"happy"}});
 
   const openMoodModal = () => {
     setShowMoodModal(true);
@@ -34,6 +40,11 @@ const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
   const closeMoodModal = () => {
     setShowMoodModal(false);
   };
+
+  const handleSaveData = handleSubmit( async (data) => {
+    //console.log(data);
+    await add_note(auth.currentUser!.uid, data.title, data.description, data.date, data.mood)
+  });
 
   // TODO: Change for Entry object to save in Firebase
   const handleSave = (id: number) => {
@@ -64,7 +75,8 @@ const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
           </IonButtons>
           <IonButtons slot="end">
             <IonButton
-              onClick={() => handleSave(1)}
+              onClick={handleSaveData}
+              type="submit"
               strong={true}
               color="primary"
             >
@@ -78,14 +90,22 @@ const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
         <div style={{ padding: "1rem" }}>
           <HeaderScreen title="Write an entry" />
 
-          <IonItem style={{ marginLeft: "-1rem" }}>
+          <IonItem
+            {...register("date", { valueAsDate: true })}
+            style={{ marginLeft: "-1rem" }}
+          >
             <IonDatetimeButton
               datetime="datetime"
               className="ion-margin-bottom ion-margin-top"
             ></IonDatetimeButton>
           </IonItem>
           <IonModal keepContentsMounted={true}>
-            <IonDatetime id="datetime"></IonDatetime>
+            <IonDatetime
+              id="datetime"
+              onIonChange={(data: any) => {
+                setValue("date", data.detail.value);
+              }}
+            ></IonDatetime>
           </IonModal>
 
           <IonInput
@@ -97,6 +117,7 @@ const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
             counter={true}
             maxlength={40}
             clearInput={true}
+            {...register("title", { required: true })}
           ></IonInput>
 
           <IonTextarea
@@ -106,6 +127,7 @@ const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
             labelPlacement="floating"
             rows={10}
             fill="outline"
+            {...register("description", { required: true })}
           ></IonTextarea>
 
           <IonList className="form-actions" lines="none">

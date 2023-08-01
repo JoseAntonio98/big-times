@@ -123,7 +123,7 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
 
           <IonItem>
             <IonInput
-              value={entry.title}
+              value={title}
               disabled={!isEditing}
               className="custom"
             ></IonInput>
@@ -131,7 +131,7 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
 
           <IonItem>
             <IonTextarea
-              value={entry.description}
+              value={description}
               rows={10}
               disabled={!isEditing}
               className="custom"
