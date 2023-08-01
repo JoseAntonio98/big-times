@@ -23,26 +23,31 @@ import { IonReactRouter } from "@ionic/react-router";
 import { Redirect, Route } from "react-router";
 import HomePage from "./pages/HomePage";
 
+import { I18nextProvider } from "react-i18next";
+import i18n from "./i18n/i18n";
+
 import "./App.css";
 
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
-    <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path="/login">
-          <LoginPage />
-        </Route>
-        <Route exact path="/home">
-          <HomePage />
-        </Route>
-        <Route exact path="/">
+    <I18nextProvider i18n={i18n}>
+      <IonReactRouter>
+        <IonRouterOutlet>
+          <Route exact path="/login">
+            <LoginPage />
+          </Route>
+          <Route exact path="/home">
+            <HomePage />
+          </Route>
+          <Route exact path="/">
+            <Redirect to="/login" />
+          </Route>
           <Redirect to="/login" />
-        </Route>
-        <Redirect to="/login" />
-      </IonRouterOutlet>
-    </IonReactRouter>
+        </IonRouterOutlet>
+      </IonReactRouter>
+    </I18nextProvider>
   </IonApp>
 );
 

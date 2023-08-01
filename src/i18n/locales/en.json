@@ -1,0 +1,15 @@
+{
+  "diary": "Diary",
+  
+  "SETTINGS": "Settings",
+  "personalTitle": "PERSONAL",
+  "languageToggle": "Change to spanish",
+  "passwordOption": "Password (PIN)",
+  "themesOption": "Themes",
+  "reminderOption": "Daily reminder",
+  "dataTitle": "MY DATA",
+  "backupOption": "Backup & Restore",
+  "deleteDataOption": "Delete app data",
+  "sessionTitle": "SESSION",
+  "logoutOption": "Logout"
+}

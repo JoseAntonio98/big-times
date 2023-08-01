@@ -1,56 +1,86 @@
-import { IonButton, IonContent, IonIcon, IonItem, IonLabel, IonPage, IonToggle } from "@ionic/react";
-import { cloudOutline, colorPaletteOutline, keyOutline, language, logOutOutline, notificationsOutline, trashBinOutline } from "ionicons/icons";
+import {
+  IonContent,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonPage,
+  IonToggle,
+} from "@ionic/react";
+import {
+  cloudOutline,
+  colorPaletteOutline,
+  keyOutline,
+  language,
+  logOutOutline,
+  notificationsOutline,
+  trashBinOutline,
+} from "ionicons/icons";
 import HeaderScreen from "../components/HeaderScreen";
 import { logout } from "../Utilities/user_firestore";
+
+import { useTranslation } from "react-i18next";
+
 import "./styles/SettingsPage.css";
 
 const SettingsPage: React.FC = () => {
+  const { t, i18n } = useTranslation();
+
+  const handleChangeLanguage = () => {
+    const newLanguage = i18n.language === "en" ? "es" : "en";
+    i18n.changeLanguage(newLanguage);
+  };
+
   return (
     <IonPage>
       <IonContent fullscreen className="ion-padding">
-        <HeaderScreen title="Settings" />
+        <HeaderScreen title={t("SETTINGS")} />
         <div className="custom-sp-container">
-          <h1 className="custom-sp-title">Personal</h1>
+          <h1 className="custom-sp-title">{t("personalTitle")}</h1>
           <div>
             <IonItem>
               <IonIcon icon={language} slot="start"></IonIcon>
-              <IonToggle>Change to Spanish</IonToggle>
+              <IonToggle
+                checked={i18n.language === "es"}
+                onIonChange={handleChangeLanguage}
+              >
+                {t("languageToggle")}
+              </IonToggle>
             </IonItem>
             <IonItem detail={true}>
               <IonIcon icon={keyOutline} slot="start"></IonIcon>
-              <IonLabel>Password (PIN)</IonLabel>
+              <IonLabel>{t("passwordOption")}</IonLabel>
             </IonItem>
             <IonItem detail={true} disabled={true}>
               <IonIcon icon={colorPaletteOutline} slot="start"></IonIcon>
-              <IonLabel>Themes</IonLabel>
+              <IonLabel>{t("themesOption")}</IonLabel>
             </IonItem>
             <IonItem>
               <IonIcon icon={notificationsOutline} slot="start"></IonIcon>
-              <IonToggle>Daily reminder</IonToggle>
+              <IonToggle>{t("reminderOption")}</IonToggle>
             </IonItem>
           </div>
         </div>
 
         <div className="custom-sp-container">
-          <h1 className="custom-sp-title">My Data</h1>
+          <h1 className="custom-sp-title">{t("dataTitle")}</h1>
           <div>
             <IonItem detail={true} disabled={true}>
               <IonIcon icon={cloudOutline} slot="start"></IonIcon>
-              <IonLabel>Backup & Restore</IonLabel>
+              <IonLabel>{t("backupOption")}</IonLabel>
             </IonItem>
             <IonItem detail={true}>
               <IonIcon icon={trashBinOutline} slot="start"></IonIcon>
-              <IonLabel>Delete app data</IonLabel>
+              <IonLabel>{t("deleteDataOption")}</IonLabel>
             </IonItem>
           </div>
         </div>
 
         <div className="custom-sp-container">
-          <h1 className="custom-sp-title">Session</h1>
+          <h1 className="custom-sp-title">{t("sessionTitle")}</h1>
           <div>
             <IonItem onClick={logout} detail={true}>
               <IonIcon icon={logOutOutline} slot="start"></IonIcon>
-              <IonLabel>Logout</IonLabel>
+              <IonLabel>{t("logoutOption")}</IonLabel>
             </IonItem>
           </div>
         </div>
