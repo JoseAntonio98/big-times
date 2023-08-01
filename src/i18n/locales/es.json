@@ -1,5 +1,35 @@
 {
-  "Diary": "Diario",
+  "tabDiary": "Diario",
+  "tabCalendar": "Calendario",
+  "tabInsights": "Análisis",
+  "tabSettings": "Configuración",
+
+  "DIARY": "Diario",
+  "searchBar": "Buscar",
+  "lastIaMessage": "Consejo del Día",
+
+  "CALENDAR": "Calendario",
+
+  "ADD_ENTRY": "Escribe tus pensamientos",
+  "saveButton": "Guardar",
+  "entryTitleLabel": "Título: ",
+  "entryDescriptionLabel": "Descripción: ",
+  "entryTitlePlaceholder": "Una descripción para tu momento",
+  "entryDescriptionPlaceholder": "¡Escribe todo lo que desees!",
+
+  "ENTRY_DETAIL": "foo",
+  "entryIaTipTitle": "Un consejo para ti",
+
+  "INSIGTS": "Estadísticas",
+  "entryStatsTitle": "ENTRADAS",
+  "statsEntries": "Entradas",
+  "statsMoods": "Estados de ánimo",
+  "statsStreak": "Racha",
+  "streakTitle": "Racha más larga: ",
+  "moodStatsTitle": "ESTADOS DE ÁNIMO",
+  "moodStatsHappy": "Feliz: ",
+  "moodStatsAngry": "Enojado: ",
+  "moodStatsSad": "Triste: ",
 
   "SETTINGS": "Ajustes",
   "personalTitle": "PERSONAL",

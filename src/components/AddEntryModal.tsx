@@ -23,6 +23,7 @@ import "./styles/AddEntryModal.css";
 import MoodModal from "./MoodModal";
 import { add_note } from "../Utilities/user_firestore";
 import { auth } from "../FirebaseConfig";
+import { useTranslation } from "react-i18next";
 
 interface AddEntryModalProps {
   isOpen: boolean;
@@ -30,16 +31,17 @@ interface AddEntryModalProps {
 }
 
 const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
-  
+  const { t } = useTranslation();
+
   const [showMoodModal, setShowMoodModal] = useState(false);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const { register, handleSubmit, setValue } = useForm({
     defaultValues: {
-      title:"", 
-      description:"",
-      date: new Date(), 
-      mood:"happy"
-    }
+      title: "",
+      description: "",
+      date: new Date(),
+      mood: "happy",
+    },
   });
 
   const openMoodModal = () => {
@@ -49,13 +51,19 @@ const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
     setShowMoodModal(false);
   };
 
-  const handleSaveData = handleSubmit( async (data) => {
+  const handleSaveData = handleSubmit(async (data) => {
     //console.log(data);
-    setLoading(true)
-    await add_note(auth.currentUser!.uid, data.title, data.description, data.date, data.mood).then(() => {
-      setLoading(false)
-      onClose()
-    })  
+    setLoading(true);
+    await add_note(
+      auth.currentUser!.uid,
+      data.title,
+      data.description,
+      data.date,
+      data.mood
+    ).then(() => {
+      setLoading(false);
+      onClose();
+    });
   });
 
   const handleAddImage = () => {
@@ -72,11 +80,13 @@ const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
   };
 
   if (loading) {
-    return <IonLoading
-      isOpen={loading}
-      onDidDismiss={() => setLoading(false)}
-      message={'Save note...'}
-    />
+    return (
+      <IonLoading
+        isOpen={loading}
+        onDidDismiss={() => setLoading(false)}
+        message={"Save note..."}
+      />
+    );
   }
 
   return (
@@ -95,7 +105,7 @@ const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
               strong={true}
               color="primary"
             >
-              Save
+              {t("saveButton")}
             </IonButton>
           </IonButtons>
         </IonToolbar>
@@ -103,7 +113,7 @@ const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
 
       <IonContent fullscreen className="ion-padding">
         <div style={{ padding: "1rem" }}>
-          <HeaderScreen title="Write an entry" />
+          <HeaderScreen title={t("ADD_ENTRY")} />
 
           <IonItem
             {...register("date", { valueAsDate: true })}
@@ -125,9 +135,9 @@ const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
 
           <IonInput
             className="ion-margin-bottom"
-            label="Title: "
+            label={t("entryTitleLabel")}
             labelPlacement="floating"
-            placeholder="A description for you momemnt"
+            placeholder={t("entryTitlePlaceholder")}
             fill="outline"
             counter={true}
             maxlength={40}
@@ -137,8 +147,8 @@ const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
 
           <IonTextarea
             className="ion-margin-bottom"
-            placeholder="Write all you want!"
-            label="Description:"
+            placeholder={t("entryDescriptionPlaceholder")}
+            label={t("entryDescriptionLabel")}
             labelPlacement="floating"
             rows={10}
             fill="outline"

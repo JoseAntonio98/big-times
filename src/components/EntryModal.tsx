@@ -31,6 +31,7 @@ import { useForm } from "react-hook-form";
 import MoodModal from "./MoodModal";
 import moment from "moment";
 import { delete_note, update_note } from "../Utilities/user_firestore";
+import { useTranslation } from "react-i18next";
 
 interface EntryModalProps {
   isOpen: boolean;
@@ -39,16 +40,19 @@ interface EntryModalProps {
 }
 
 const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
+  const { t } = useTranslation();
+
   const { id, title, description, date, mood } = entry;
   const [isEditing, setIsEditing] = useState(false);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const { register, handleSubmit, setValue } = useForm({
     defaultValues: {
-      title:title,
-      description:description,
-      date: new Date(date.toDate()), 
-      mood:mood
-    }});
+      title: title,
+      description: description,
+      date: new Date(date.toDate()),
+      mood: mood,
+    },
+  });
   const [showMoodModal, setShowMoodModal] = useState(false);
 
   const openMoodModal = () => {
@@ -58,26 +62,28 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
     setShowMoodModal(false);
   };
 
-  const handleSaveData = handleSubmit( async (data) => {
-    await update_note(id, data.title, data.description, data.date, data.mood)
-    onClose()
+  const handleSaveData = handleSubmit(async (data) => {
+    await update_note(id, data.title, data.description, data.date, data.mood);
+    onClose();
   });
 
   const handleDelete = async (id: string) => {
-    setLoading(true)
+    setLoading(true);
     console.log(`Deleting entry ${id}`);
-    await delete_note(id).then(()=>{
-      setLoading(false)
-      onClose()
-    })
+    await delete_note(id).then(() => {
+      setLoading(false);
+      onClose();
+    });
   };
 
   if (loading) {
-    return <IonLoading
-      isOpen={loading}
-      onDidDismiss={() => setLoading(false)}
-      message={'Delete note...'}
-    />
+    return (
+      <IonLoading
+        isOpen={loading}
+        onDidDismiss={() => setLoading(false)}
+        message={"Delete note..."}
+      />
+    );
   }
 
   return (
@@ -97,7 +103,7 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
               color="primary"
               disabled={!isEditing}
             >
-              Save
+              {t("saveButton")}
             </IonButton>
           </IonButtons>
         </IonToolbar>
@@ -140,15 +146,18 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
 
         {/* TODO: Improve styles */}
         <IonList>
-          <IonItem {...register("date", { valueAsDate: true })} >
+          <IonItem {...register("date", { valueAsDate: true })}>
             <IonDatetimeButton datetime="datetime"></IonDatetimeButton>
           </IonItem>
           <IonModal keepContentsMounted={true}>
-            <IonDatetime id="datetime" disabled={!isEditing}
-            value={moment(date.toDate()).toISOString(true)}
-            onIonChange={(data: any) => {
-              setValue("date", data.detail.value);
-            }} ></IonDatetime>
+            <IonDatetime
+              id="datetime"
+              disabled={!isEditing}
+              value={moment(date.toDate()).toISOString(true)}
+              onIonChange={(data: any) => {
+                setValue("date", data.detail.value);
+              }}
+            ></IonDatetime>
           </IonModal>
 
           <IonItem>
@@ -171,7 +180,7 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
           </IonItem>
         </IonList>
 
-        <EntryAdvice />
+        <EntryAdvice title={t("entryIaTipTitle")} />
 
         {/* TODO: Ver si van estas opciones | NO TAN IMPORTANTE */}
         <IonList className="form-actions" lines="none">

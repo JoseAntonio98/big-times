@@ -14,11 +14,14 @@ import EntryModal from "../components/EntryModal";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { auth, db } from "../FirebaseConfig";
 import { get_notes } from "../Utilities/user_firestore";
+import { useTranslation } from "react-i18next";
 
 const CalendarPage: React.FC = () => {
+  const { t } = useTranslation();
+
   const [selectedItem, setSelectedItem] = useState<any | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [entries, setEntries] = useState([{}])
+  const [entries, setEntries] = useState([{}]);
   const user = auth.currentUser;
 
   const handleItemClick = (item: any) => {
@@ -30,29 +33,33 @@ const CalendarPage: React.FC = () => {
   };
 
   const getEntries = async () => {
-    const data = await get_notes(user!.uid)
-    setEntries(data.docs.map( (doc) => ({
-      ...doc.data()
-    })))
-    setLoading(false)
-  }
+    const data = await get_notes(user!.uid);
+    setEntries(
+      data.docs.map((doc) => ({
+        ...doc.data(),
+      }))
+    );
+    setLoading(false);
+  };
 
   useEffect(() => {
-    getEntries()
-  }, [])
+    getEntries();
+  }, []);
 
   if (loading) {
-    return <IonLoading
-      isOpen={loading}
-      onDidDismiss={() => setLoading(false)}
-      message={'Get notes...'}
-    />
+    return (
+      <IonLoading
+        isOpen={loading}
+        onDidDismiss={() => setLoading(false)}
+        message={"Get notes..."}
+      />
+    );
   }
 
   return (
     <IonPage>
       <IonContent fullscreen className="ion-padding">
-        <HeaderScreen title="Calendar" />
+        <HeaderScreen title={t("CALENDAR")} />
 
         <IonDatetime presentation="date"></IonDatetime>
 

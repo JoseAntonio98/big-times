@@ -3,28 +3,31 @@ import HeaderScreen from "../components/HeaderScreen";
 
 import "./styles/InsightsPage.css";
 import { checkmarkCircle, flame } from "ionicons/icons";
+import { useTranslation } from "react-i18next";
 
 const InsightsPage: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <IonPage>
       <IonContent fullscreen className="ion-padding">
-        <HeaderScreen title="Insights" />
+        <HeaderScreen title={t("INSIGTS")} />
 
         <div className="custom-ip-container">
           <div>
-            <h1 className="custom-sp-title">Entries Stats</h1>
+            <h1 className="custom-sp-title">{t("entryStatsTitle")}</h1>
             <div className="custom-ip-entries-stats custom-ip-box-shadow">
               <div className="custom-ip-entry">
                 <h1>1</h1>
-                <h2>Entries</h2>
+                <h2>{t("statsEntries")}</h2>
               </div>
               <div className="custom-ip-entry">
                 <h1>1</h1>
-                <h2>Moods</h2>
+                <h2>{t("statsMoods")}</h2>
               </div>
               <div className="custom-ip-entry">
                 <h1>1</h1>
-                <h2>Streak</h2>
+                <h2>{t("statsStreak")}</h2>
               </div>
               <div className="custom-ip-streak">
                 <IonItem>
@@ -33,14 +36,14 @@ const InsightsPage: React.FC = () => {
                     color="warning"
                     style={{ marginRight: ".35rem" }}
                   ></IonIcon>
-                  <IonLabel>Longest streak: 7</IonLabel>
+                  <IonLabel>{t("streakTitle")} 7</IonLabel>
                 </IonItem>
               </div>
             </div>
           </div>
 
           <div>
-            <h1 className="custom-sp-title">Mood Stats</h1>
+            <h1 className="custom-sp-title">{t("moodStatsTitle")}</h1>
             <div className="custom-ip-mood-stats custom-ip-box-shadow">
               <div>
                 <div className="custom-ip-mood-chart"></div>
@@ -51,7 +54,7 @@ const InsightsPage: React.FC = () => {
                   <IonIcon icon={checkmarkCircle} color="success"></IonIcon>
                   <IonLabel>
                     <div className="custom-ip-mood-item">
-                      <p>Happy: </p>
+                      <p>{t("moodStatsHappy")}</p>
                       <p>100%</p>
                     </div>
                   </IonLabel>
@@ -60,7 +63,7 @@ const InsightsPage: React.FC = () => {
                   <IonIcon icon={checkmarkCircle} color="danger"></IonIcon>
                   <IonLabel>
                     <div className="custom-ip-mood-item">
-                      <p>Angry: </p>
+                      <p>{t("moodStatsAngry")} </p>
                       <p>100%</p>
                     </div>
                   </IonLabel>
@@ -69,7 +72,7 @@ const InsightsPage: React.FC = () => {
                   <IonIcon icon={checkmarkCircle} color="tertiary"></IonIcon>
                   <IonLabel>
                     <div className="custom-ip-mood-item">
-                      <p>Sad: </p>
+                      <p>{t("moodStatsSad")} </p>
                       <p>100%</p>
                     </div>
                   </IonLabel>

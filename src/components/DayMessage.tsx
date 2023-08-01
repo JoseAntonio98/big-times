@@ -7,13 +7,15 @@ import {
 import React from "react";
 import "./styles/DayMessage.css";
 
-const DayMessage: React.FC = () => {
+interface DayMessageProps {
+  title: string;
+}
+
+const DayMessage: React.FC<DayMessageProps> = ({ title }) => {
   return (
     <IonCard color="primary">
       <IonCardHeader>
-        <IonCardTitle className="ion-text-center">
-          Day Message for you!
-        </IonCardTitle>
+        <IonCardTitle className="ion-text-center">{title}</IonCardTitle>
       </IonCardHeader>
       <IonCardContent className="custom-dm-message">
         Here will be a AI message according the last user entry. For example:

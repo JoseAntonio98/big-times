@@ -22,8 +22,11 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../FirebaseConfig";
 import { useState } from "react";
 import AddEntryModal from "../components/AddEntryModal";
+import { useTranslation } from "react-i18next";
 
 const HomePage: React.FC = () => {
+  const { t } = useTranslation();
+
   onAuthStateChanged(auth, (user) => {
     if (user) {
       console.log(user.displayName);
@@ -70,11 +73,11 @@ const HomePage: React.FC = () => {
           <IonTabBar slot="bottom">
             <IonTabButton tab="diary" href="/home/diary">
               <IonIcon aria-hidden="true" icon={book} />
-              <IonLabel>Diary</IonLabel>
+              <IonLabel>{t("tabDiary")}</IonLabel>
             </IonTabButton>
             <IonTabButton tab="calendar" href="/home/calendar">
               <IonIcon aria-hidden="true" icon={calendar} />
-              <IonLabel>Calendar</IonLabel>
+              <IonLabel> {t("tabCalendar")}</IonLabel>
             </IonTabButton>
             {/* <IonTabButton tab="add" href="/home/add">
               <IonFab>
@@ -92,11 +95,11 @@ const HomePage: React.FC = () => {
             </IonTabButton>
             <IonTabButton tab="insights" href="/home/insights">
               <IonIcon aria-hidden="true" icon={eye} />
-              <IonLabel>Insights</IonLabel>
+              <IonLabel> {t("tabInsights")}</IonLabel>
             </IonTabButton>
             <IonTabButton tab="settings" href="/home/settings">
               <IonIcon aria-hidden="true" icon={settings} />
-              <IonLabel>Settings</IonLabel>
+              <IonLabel> {t("tabSettings")}</IonLabel>
             </IonTabButton>
           </IonTabBar>
         </IonTabs>

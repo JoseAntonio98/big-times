@@ -1,6 +1,36 @@
 {
-  "diary": "Diary",
-  
+  "tabDiary": "Diary",
+  "tabCalendar": "Calendar",
+  "tabInsights": "Insights",
+  "tabSettings": "Settings",
+
+  "DIARY": "Diary",
+  "searchBar": "Search",
+  "lastIaMessage": "Daily Tip",
+
+  "CALENDAR": "Calendar",
+
+  "ADD_ENTRY": "Write your thoughts",
+  "saveButton": "Save",
+  "entryTitleLabel": "Title: ",
+  "entryDescriptionLabel": "Description: ",
+  "entryTitlePlaceholder": "A Description for yoru moment",
+  "entryDescriptionPlaceholder": "Write all you want!",
+
+  "ENTRY_DETAIL": "foo",
+  "entryIaTipTitle": "An advice for you",
+
+  "INSIGTS": "Insights",
+  "entryStatsTitle": "ENTRIES STATS",
+  "statsEntries": "Entries",
+  "statsMoods": "Moods",
+  "statsStreak": "Streak",
+  "streakTitle": "Longest streak: ",
+  "moodStatsTitle": "MOOD STATS",
+  "moodStatsHappy": "Happy: ",
+  "moodStatsAngry": "Angry: ",
+  "moodStatsSad": "Sad: ",
+
   "SETTINGS": "Settings",
   "personalTitle": "PERSONAL",
   "languageToggle": "Change to spanish",
