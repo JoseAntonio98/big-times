@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  IonLoading,
   IonModal,
   IonHeader,
   IonToolbar,
@@ -22,7 +23,6 @@ import "./styles/AddEntryModal.css";
 import MoodModal from "./MoodModal";
 import { add_note } from "../Utilities/user_firestore";
 import { auth } from "../FirebaseConfig";
-import myToast from "../Utilities/myToast";
 
 interface AddEntryModalProps {
   isOpen: boolean;
@@ -32,7 +32,15 @@ interface AddEntryModalProps {
 const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
   
   const [showMoodModal, setShowMoodModal] = useState(false);
-  const { register, handleSubmit, setValue } = useForm({defaultValues: {title:"", description:"",date: new Date(), mood:"happy"}});
+  const [loading, setLoading] = useState(false)
+  const { register, handleSubmit, setValue } = useForm({
+    defaultValues: {
+      title:"", 
+      description:"",
+      date: new Date(), 
+      mood:"happy"
+    }
+  });
 
   const openMoodModal = () => {
     setShowMoodModal(true);
@@ -43,13 +51,12 @@ const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
 
   const handleSaveData = handleSubmit( async (data) => {
     //console.log(data);
-    await add_note(auth.currentUser!.uid, data.title, data.description, data.date, data.mood)
+    setLoading(true)
+    await add_note(auth.currentUser!.uid, data.title, data.description, data.date, data.mood).then(() => {
+      setLoading(false)
+      onClose()
+    })  
   });
-
-  // TODO: Change for Entry object to save in Firebase
-  const handleSave = (id: number) => {
-    console.log(`Saving entry ${id}`);
-  };
 
   const handleAddImage = () => {
     console.log("Picking image");
@@ -63,6 +70,14 @@ const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
   const handleTextRecognition = () => {
     console.log("Text Recognition...");
   };
+
+  if (loading) {
+    return <IonLoading
+      isOpen={loading}
+      onDidDismiss={() => setLoading(false)}
+      message={'Save note...'}
+    />
+  }
 
   return (
     <IonModal isOpen={isOpen} onDidDismiss={onClose}>

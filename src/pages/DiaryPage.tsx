@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { IonRefresher, IonRefresherContent, RefresherEventDetail, IonLoading, IonContent, IonPage, IonSearchbar } from "@ionic/react";
+import { IonRefresher, IonRefresherContent, RefresherEventDetail, IonLoading, IonContent, IonPage, IonSearchbar, useIonViewDidEnter } from "@ionic/react";
 import { auth, db } from "../FirebaseConfig";
 import EntryModal from "../components/EntryModal";
 import DayMessage from "../components/DayMessage";
 import DiaryEmpty from "../components/DiaryEmpty";
 import EntryCard from "../components/EntryCard";
 import HeaderScreen from "../components/HeaderScreen";
-import { useHistory } from "react-router";
-import { entries } from "../data/fake-data";
-import { collection, getDocs, query, where } from "firebase/firestore";
 import { get_notes } from "../Utilities/user_firestore";
 
 const DiaryPage: React.FC = () => {
@@ -26,22 +23,23 @@ const DiaryPage: React.FC = () => {
   };
 
   const handleUpdateEntries = (event: CustomEvent<RefresherEventDetail>) => {
+    getEntries()
     setTimeout(() => {
-      getEntries()
       event.detail.complete();
-    }, 2000);
+    }, 1000);
   }
 
-  const getEntries = async () => {
+  const getEntries = async () => {    
     const data = await get_notes(user!.uid)
     setEntries(data.docs.map( (doc) => ({
+      id: doc.id,
       ...doc.data()
     })))
     setLoading(false)
   }
 
   useEffect(() => {    
-    getEntries()
+    getEntries()    
   }, [])
 
   if (loading) {
