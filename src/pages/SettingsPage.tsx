@@ -46,7 +46,7 @@ const SettingsPage: React.FC = () => {
                 {t("languageToggle")}
               </IonToggle>
             </IonItem>
-            <IonItem detail={true}>
+            <IonItem detail={true} disabled={true}>
               <IonIcon icon={keyOutline} slot="start"></IonIcon>
               <IonLabel>{t("passwordOption")}</IonLabel>
             </IonItem>

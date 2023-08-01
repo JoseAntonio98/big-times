@@ -27,9 +27,10 @@
   "statsStreak": "Racha",
   "streakTitle": "Racha más larga: ",
   "moodStatsTitle": "ESTADOS DE ÁNIMO",
-  "moodStatsHappy": "Feliz: ",
-  "moodStatsAngry": "Enojado: ",
-  "moodStatsSad": "Triste: ",
+  "moodStatsHappy": "Feliz",
+  "moodStatsAngry": "Enojado",
+  "moodStatsSad": "Triste",
+  "moodStatsNone": "Sin estado",
 
   "SETTINGS": "Ajustes",
   "personalTitle": "PERSONAL",

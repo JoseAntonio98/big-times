@@ -21,6 +21,7 @@
 .custom-ip-entry {
   text-align: center;
   padding: 10px;
+  height: 100%;
 }
 
 .custom-ip-entry h1 {
@@ -58,3 +59,8 @@
   justify-content: space-between;
   margin-left: 0.25rem;
 }
+
+.item {
+  margin-left: -1rem;
+}
+

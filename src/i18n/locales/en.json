@@ -27,9 +27,10 @@
   "statsStreak": "Streak",
   "streakTitle": "Longest streak: ",
   "moodStatsTitle": "MOOD STATS",
-  "moodStatsHappy": "Happy: ",
-  "moodStatsAngry": "Angry: ",
-  "moodStatsSad": "Sad: ",
+  "moodStatsHappy": "Happy",
+  "moodStatsAngry": "Angry",
+  "moodStatsSad": "Sad",
+  "moodStatsNone": "No mood",
 
   "SETTINGS": "Settings",
   "personalTitle": "PERSONAL",

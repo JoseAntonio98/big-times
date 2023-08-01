@@ -50,29 +50,38 @@ const InsightsPage: React.FC = () => {
                 {/*  Quitar div, y colocar un chart */}
               </div>
               <div>
-                <IonItem>
+                <IonItem className="item">
                   <IonIcon icon={checkmarkCircle} color="success"></IonIcon>
                   <IonLabel>
                     <div className="custom-ip-mood-item">
-                      <p>{t("moodStatsHappy")}</p>
+                      <p className="item_label">{t("moodStatsHappy")}</p>
                       <p>100%</p>
                     </div>
                   </IonLabel>
                 </IonItem>
-                <IonItem>
+                <IonItem className="item">
                   <IonIcon icon={checkmarkCircle} color="danger"></IonIcon>
                   <IonLabel>
                     <div className="custom-ip-mood-item">
-                      <p>{t("moodStatsAngry")} </p>
+                      <p className="item_label">{t("moodStatsAngry")} </p>
                       <p>100%</p>
                     </div>
                   </IonLabel>
                 </IonItem>
-                <IonItem>
+                <IonItem className="item">
                   <IonIcon icon={checkmarkCircle} color="tertiary"></IonIcon>
                   <IonLabel>
                     <div className="custom-ip-mood-item">
-                      <p>{t("moodStatsSad")} </p>
+                      <p className="item_label">{t("moodStatsSad")} </p>
+                      <p>100%</p>
+                    </div>
+                  </IonLabel>
+                </IonItem>
+                <IonItem className="item">
+                  <IonIcon icon={checkmarkCircle} color="medium"></IonIcon>
+                  <IonLabel>
+                    <div className="custom-ip-mood-item">
+                      <p className="item_label">{t("moodStatsNone")} </p>
                       <p>100%</p>
                     </div>
                   </IonLabel>
