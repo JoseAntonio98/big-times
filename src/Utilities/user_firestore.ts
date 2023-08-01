@@ -21,7 +21,7 @@ export function logout ()
     signOut(auth)
 }
 
-export async function add_note (_userUid: String, _title: String, _description: String, _date: Date, _mood:String)
+export async function add_note (_userUid: String, _title: String, _description: String, _date: Date, _mood:String, _advice: String)
 {
     try 
     {
@@ -30,7 +30,8 @@ export async function add_note (_userUid: String, _title: String, _description: 
             title: _title,
             description: _description,
             date: _date,
-            mood: _mood
+            mood: _mood,
+            advice: _advice
         })
         //myToast("Added correctly!!")
     }
@@ -47,13 +48,14 @@ export async function get_notes(_userUid: String) {
   return data
 }
 
-export async function update_note(_noteId: string, _title: String, _description: String, _date: Date, _mood:String) {
+export async function update_note(_noteId: string, _title: String, _description: String, _date: Date, _mood:String, _advice: String) {
   const dataRef = doc( db, 'notes', _noteId )
   await updateDoc( dataRef, {
     title: _title,
     description: _description,
     date: _date,
-    mood: _mood
+    mood: _mood,
+    advice: _advice
   })
 }
 
