@@ -29,6 +29,7 @@ import "./styles/EntryModal.css";
 import EntryAdvice from "./EntryAdvice";
 import { useForm } from "react-hook-form";
 import MoodModal from "./MoodModal";
+import moment from "moment";
 import { delete_note, update_note } from "../Utilities/user_firestore";
 
 interface EntryModalProps {
@@ -58,7 +59,6 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
   };
 
   const handleSaveData = handleSubmit( async (data) => {
-    //console.log(data);
     await update_note(id, data.title, data.description, data.date, data.mood)
     onClose()
   });
@@ -145,6 +145,7 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
           </IonItem>
           <IonModal keepContentsMounted={true}>
             <IonDatetime id="datetime" disabled={!isEditing}
+            value={moment(date.toDate()).toISOString(true)}
             onIonChange={(data: any) => {
               setValue("date", data.detail.value);
             }} ></IonDatetime>
