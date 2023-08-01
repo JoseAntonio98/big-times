@@ -45,7 +45,7 @@ interface EntryModalProps {
 const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
   const { t } = useTranslation();
 
-  const { id, title, description, date, mood } = entry;
+  const { id, title, description, date, mood, advice } = entry;
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit, setValue } = useForm({
@@ -54,6 +54,7 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
       description: description,
       date: new Date(date.toDate()),
       mood: mood,
+      advice: advice
     },
   });
   const [showMoodModal, setShowMoodModal] = useState(false);
@@ -66,7 +67,8 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
   };
 
   const handleSaveData = handleSubmit(async (data) => {
-    await update_note(id, data.title, data.description, data.date, data.mood);
+    await update_note(id, data.title, data.description, data.date, data.mood, data.advice);
+    //console.log(data)
     onClose();
   });
 
@@ -86,8 +88,15 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
   const openai = new OpenAIApi(configuration);
 
   // TODO: CARGAR INICIALMENTE CON EL VALOR GUARDADO EN LA BASE DE DATOS SI TUVIESE, CASO CONTRARIO VACIO
-  const [advice, setAdvice] = useState("");
+  const [_advice, setAdvice] = useState(advice);
   const [adviceLoading, setAdviceLoading] = useState(false);
+
+  /*const generateAdviceEx = async () => {
+    setAdviceLoading(true);
+    setValue("advice", "adviceByAi")
+    setAdvice("adviceByAi")
+    setAdviceLoading(false);
+  }*/
 
   const generateAdvice = async () => {
     setAdviceLoading(true);
@@ -109,6 +118,7 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
       console.log(adviceByAi);
 
       setAdvice(adviceByAi || "");
+      setValue("advice", adviceByAi)
     } catch (error) {
       console.error(error);
     } finally {
@@ -233,7 +243,7 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
           </IonItem>
         </IonList>
 
-        {advice.length === 0 ? (
+        {_advice.length === 0 ? (
           <div className="advice-ctn">
             {adviceLoading ? (
               <IonSpinner />
@@ -243,7 +253,9 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
                 <IonButton
                   fill="outline"
                   color="primary"
+                  disabled={!isEditing}
                   onClick={generateAdvice}
+                  {...register("advice")}
                 >
                   {t("adviceButton")}
                 </IonButton>
@@ -251,7 +263,7 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
             )}
           </div>
         ) : (
-          <EntryAdvice title={t("entryIaTipTitle")} message={advice} />
+          <EntryAdvice title={t("entryIaTipTitle")} message={_advice} />
         )}
       </IonContent>
 

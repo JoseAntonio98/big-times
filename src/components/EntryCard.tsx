@@ -10,7 +10,7 @@ import React from "react";
 import "./styles/EntryCard.css";
 
 const EntryCard: React.FC<any> = ({ entry, onClick }) => {
-  const { title, description, date, mood } = entry;
+  const { title, description, date, mood, advice } = entry;
 
   return (
     <IonCard onClick={onClick}>
