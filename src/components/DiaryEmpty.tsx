@@ -1,15 +1,15 @@
 import React from "react";
 
 import "./styles/DiaryEmpty.css";
+import { useTranslation } from "react-i18next";
 
 const DiaryEmpty: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="container-center">
-      <h1 className="ee-title">Nothing here yet</h1>
-      <p className="ee-message">
-        Write down your thoughts and track your mood to get insigths. Add your
-        first entry
-      </p>
+      <h1 className="ee-title">{t("emptyDiaryTitle")}</h1>
+      <p className="ee-message">{t("emptyDiaryText")}</p>
     </div>
   );
 };

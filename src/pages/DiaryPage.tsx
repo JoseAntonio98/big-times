@@ -54,7 +54,7 @@ const DiaryPage: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log("getEntries")
+    console.log("getEntries");
     getEntries();
   }, []);
 
@@ -81,8 +81,11 @@ const DiaryPage: React.FC = () => {
           <IonRefresherContent></IonRefresherContent>
         </IonRefresher>
 
-        <DayMessage title={t("lastIaMessage")} entries={entries} />
-        {entries ? (
+        {entries.length > 0 ? (
+          <DayMessage title={t("lastIaMessage")} entries={entries} />
+        ) : null}
+
+        {entries.length > 0 ? (
           <div style={{ marginTop: "2rem" }}>
             {entries.map((entry, index: number) => (
               <EntryCard

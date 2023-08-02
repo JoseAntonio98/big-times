@@ -44,7 +44,7 @@ const CalendarPage: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log("getEntries")
+    console.log("getEntries");
     getEntries();
   }, []);
 
@@ -65,7 +65,7 @@ const CalendarPage: React.FC = () => {
 
         <IonDatetime presentation="date"></IonDatetime>
 
-        {entries ? (
+        {entries.length > 0 ? (
           <div style={{ marginTop: "2rem" }}>
             {entries.map((entry, index: number) => (
               <EntryCard

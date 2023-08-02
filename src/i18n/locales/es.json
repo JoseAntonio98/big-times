@@ -46,5 +46,11 @@
 
   "aiError": "Algo salió mal. Intente más tarde",
   "adviceQuestion": "¿Quieres un consejo por IA?",
-  "adviceButton": "Obtener consejo"
+  "adviceButton": "Obtener consejo",
+
+  "emptyDiaryTitle": "Todavía no hay registros",
+  "emptyDiaryText": "Escriba sus pensamientos y haga un seguimiento de su estado de ánimo para obtener información. Añade tu primera entrada",
+
+  "emptyCalendarTitle": "Todavía no registraste nada",
+  "emptyCalendarText": "Registre sus pensamientos y estados de ánimo en este día"
 }
