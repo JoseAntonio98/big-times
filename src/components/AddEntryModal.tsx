@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   IonLoading,
   IonModal,
@@ -26,13 +26,24 @@ import HeaderScreen from "./HeaderScreen";
 import "./styles/AddEntryModal.css";
 import MoodModal from "./MoodModal";
 import { add_note } from "../Utilities/user_firestore";
-import { auth } from "../FirebaseConfig";
+import { ref, uploadBytes } from "firebase/storage"
+import { auth, storage } from "../FirebaseConfig";
 import { useTranslation } from "react-i18next";
-import { usePhotoGallery } from "../Utilities/usePhotoGallery";
+import { usePhotoGallery, UserPhoto, base64FromPath } from "../Utilities/usePhotoGallery";
 
 interface AddEntryModalProps {
   isOpen: boolean;
   onClose: () => void;
+}
+
+interface Note {
+  title:String,
+  description: String,
+  date: Date,
+  mood: String,
+  advice: String,
+  photos: UserPhoto[],
+  photosUrl: String[]
 }
 
 const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
@@ -40,16 +51,24 @@ const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
 
   const [showMoodModal, setShowMoodModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { photos, takePhoto } = usePhotoGallery()
-  const { register, handleSubmit, setValue } = useForm({
+  const [photosUrl, setPhotosUrl] = useState([""])
+  const { photos, takePhoto  } = usePhotoGallery()
+  const { register, handleSubmit, setValue } = useForm<Note>({
     defaultValues: {
       title: "",
       description: "",
       date: new Date(),
       mood: "happy",
       advice: "",
+      photos: [],
+      photosUrl: []
     },
   });
+  
+  useEffect (() => {
+    setValue("photos", photos)
+  },[photos])
+  
 
   const openMoodModal = () => {
     setShowMoodModal(true);
@@ -58,26 +77,50 @@ const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
     setShowMoodModal(false);
   };
 
+  const upload_note_images = async (photos: UserPhoto[]) => {
+
+    //console.log(photos)
+    photos.map( async (photo) => {
+      const imageRef = ref(storage, `images/${auth.currentUser!.uid}/${photo.filepath}`)
+      const response = await fetch(photo.webviewPath!);
+      const blob = await response.blob();
+      uploadBytes(imageRef, blob).then((response)=>{
+        // colocarlo en la varaible photoURL
+        // mandarlo con los datos
+        const path = response.ref.fullPath
+        setPhotosUrl(photosUrl.concat(path))
+      })
+    });
+
+  };
+
   const handleSaveData = handleSubmit(async (data) => {
-    //console.log(data);
+    
     setLoading(true);
+    await upload_note_images(data.photos)
+
+    //console.log(photosUrl)
+
     await add_note(
       auth.currentUser!.uid,
       data.title,
       data.description,
       data.date,
       data.mood,
-      data.advice
+      data.advice,
+      photosUrl
     ).then(() => {
       setLoading(false);
       onClose();
     });
+
   });
 
   const handleAddImage = async () => {
     console.log("Picking image");
-    await takePhoto()
-  };
+    await takePhoto();
+  };  
+
   const handleRecordDescription = () => {
     console.log("Recording");
   };
@@ -181,7 +224,7 @@ const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
         </div>
         <div>
           <IonGrid>
-            <IonRow>
+            <IonRow {...register("photos")}>
               {photos.map( (photo, index ) => (
                 <IonCol size="4" key={photo.filepath}>
                   <IonImg src={photo.webviewPath} />

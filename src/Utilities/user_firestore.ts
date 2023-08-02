@@ -21,7 +21,7 @@ export function logout ()
     signOut(auth)
 }
 
-export async function add_note (_userUid: String, _title: String, _description: String, _date: Date, _mood:String, _advice: String)
+export async function add_note (_userUid: String, _title: String, _description: String, _date: Date, _mood:String, _advice: String, _photos: string[])
 {
     try 
     {
@@ -31,7 +31,8 @@ export async function add_note (_userUid: String, _title: String, _description: 
             description: _description,
             date: _date,
             mood: _mood,
-            advice: _advice
+            advice: _advice,
+            photos: _photos
         })
         //myToast("Added correctly!!")
     }

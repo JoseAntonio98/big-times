@@ -60,6 +60,7 @@ export function usePhotoGallery() {
 export async function base64FromPath(path: string): Promise<string> {
   const response = await fetch(path);
   const blob = await response.blob();
+  
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onerror = reject;
