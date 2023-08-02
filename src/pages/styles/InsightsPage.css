@@ -41,7 +41,7 @@
 
 .custom-ip-mood-stats {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr;
   grid-template-rows: auto;
   gap: 1rem;
   padding: 1rem;
