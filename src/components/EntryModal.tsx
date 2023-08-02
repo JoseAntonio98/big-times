@@ -46,8 +46,10 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
   const { t } = useTranslation();
 
   const { id, title, description, date, mood, advice } = entry;
-  const [isEditing, setIsEditing] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [ _mood, setMood] = useState(mood);
+  const [ isEditing, setIsEditing] = useState(false);
+  const [ updateLoading, setUpdateLoading ] = useState(false);
+  const [ deleteLoading, setDeleteLoading ] = useState(false);
   const { register, handleSubmit, setValue } = useForm({
     defaultValues: {
       title: title,
@@ -67,16 +69,23 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
   };
 
   const handleSaveData = handleSubmit(async (data) => {
-    await update_note(id, data.title, data.description, data.date, data.mood, data.advice);
-    //console.log(data)
-    onClose();
+    setUpdateLoading(true)
+    await update_note(id, data.title, data.description, data.date, data.mood, data.advice).then((response) => {
+      setUpdateLoading(false);
+      onClose();
+    }) ;
   });
 
+  const handleUpdateMood = (_mood: String) => {
+    setMood(_mood)
+    setValue("mood", _mood)
+  }
+
   const handleDelete = async (id: string) => {
-    setLoading(true);
+    setDeleteLoading(true);
     //console.log(`Deleting entry ${id}`);
     await delete_note(id).then(() => {
-      setLoading(false);
+      setDeleteLoading(false);
       onClose();
     });
   };
@@ -122,15 +131,25 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
     } catch (error) {
       console.error(error);
     } finally {
-      setLoading(false);
+      setAdviceLoading(false);
     }
   };
 
-  if (loading) {
+  if (updateLoading) {
     return (
       <IonLoading
-        isOpen={loading}
-        onDidDismiss={() => setLoading(false)}
+        isOpen={updateLoading}
+        onDidDismiss={() => setUpdateLoading(false)}
+        message={"Update note..."}
+      />
+    );
+  }
+
+  if (deleteLoading) {
+    return (
+      <IonLoading
+        isOpen={deleteLoading}
+        onDidDismiss={() => setDeleteLoading(false)}
         message={"Delete note..."}
       />
     );
@@ -161,13 +180,13 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
       <IonContent className="ion-padding">
         <IonList className="options">
           <IonItem disabled={!isEditing} onClick={openMoodModal}>
-            {mood ? (
-              <div className="">
-                {mood == "happy" ? (
+            {_mood ? (
+              <div {...register("mood")} className="">
+                {_mood == "happy" ? (
                   <span className="emoji-small">&#128512;</span>
-                ) : mood == "angry" ? (
+                ) : _mood == "angry" ? (
                   <span className="emoji-small">&#128544;</span>
-                ) : mood == "sad" ? (
+                ) : _mood == "sad" ? (
                   <span className="emoji-small">&#128546;</span>
                 ) : null}
               </div>
@@ -268,7 +287,7 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
       </IonContent>
 
       {showMoodModal && (
-        <MoodModal isOpen={showMoodModal} onClose={() => closeMoodModal()} />
+        <MoodModal isOpen={showMoodModal} updateMood={handleUpdateMood} onClose={() => closeMoodModal()} />
       )}
     </IonModal>
   );

@@ -124,9 +124,11 @@ const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
   const handleRecordDescription = () => {
     console.log("Recording");
   };
-  const handleAddMood = () => {
-    console.log("Picking mood");
-  };
+
+  const handleUpdateMood = (_mood: String) => {
+    setValue("mood", _mood)
+  }
+
   const handleTextRecognition = () => {
     console.log("Text Recognition...");
   };
@@ -214,7 +216,7 @@ const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
             <IonItem>
               <IonIcon icon={mic} onClick={handleRecordDescription}></IonIcon>
             </IonItem>
-            <IonItem>
+            <IonItem {...register("mood")}>
               <IonIcon icon={happy} onClick={openMoodModal}></IonIcon>
             </IonItem>
             <IonItem>
@@ -236,7 +238,7 @@ const AddEntryModal: React.FC<AddEntryModalProps> = ({ isOpen, onClose }) => {
       </IonContent>
 
       {showMoodModal && (
-        <MoodModal isOpen={showMoodModal} onClose={() => closeMoodModal()} />
+        <MoodModal isOpen={showMoodModal} updateMood={handleUpdateMood} onClose={() => closeMoodModal()} />
       )}
     </IonModal>
   );
