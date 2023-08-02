@@ -52,5 +52,7 @@
   "emptyDiaryText": "Write down your thoughts and track your mood to get insigths. Add your first entry",
 
   "emptyCalendarTitle": "Nothing here yet",
-  "emptyCalendarText": "Record your thoughts and moods on this day"
+  "emptyCalendarText": "Record your thoughts and moods on this day",
+
+  "adviceEmpty": "You didn't create an IA advice yet. Try to create an advice inside your entries!"
 }

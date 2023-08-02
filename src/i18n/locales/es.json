@@ -52,5 +52,7 @@
   "emptyDiaryText": "Escriba sus pensamientos y haga un seguimiento de su estado de ánimo para obtener información. Añade tu primera entrada",
 
   "emptyCalendarTitle": "Todavía no registraste nada",
-  "emptyCalendarText": "Registre sus pensamientos y estados de ánimo en este día"
+  "emptyCalendarText": "Registre sus pensamientos y estados de ánimo en este día",
+
+  "adviceEmpty": "No creates un consejo por IA todavía. Prueba creando uno en una de tus entradas!"
 }

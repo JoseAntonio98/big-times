@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 import { auth } from "../FirebaseConfig";
 import { get_notes } from "../Utilities/user_firestore";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 const InsightsPage: React.FC = () => {
   const { t } = useTranslation();
@@ -34,18 +34,24 @@ const InsightsPage: React.FC = () => {
   const getMoodsCounter = () => {
     setMoodsCounter(entries.filter((entry: any) => entry.mood !== "").length);
 
-    setHappyCounter(entries.filter((entry: any) => entry.mood === "happy").length);
+    setHappyCounter(
+      entries.filter((entry: any) => entry.mood === "happy").length
+    );
     setSadCounter(entries.filter((entry: any) => entry.mood === "sad").length);
-    setAngryCounter(entries.filter((entry: any) => entry.mood === "angry").length);
+    setAngryCounter(
+      entries.filter((entry: any) => entry.mood === "angry").length
+    );
     setNoMoodCounter(entries.filter((entry: any) => entry.mood === "").length);
-  }
+  };
 
   useEffect(() => {
     getEntries();
     getMoodsCounter();
-  }, [entries]);
+    console.log("Insights");
+  }, []);
 
-  const getPercentage = (count: number) => (count * 100 / entries.length).toFixed(1);
+  const getPercentage = (count: number) =>
+    ((count * 100) / entries.length).toFixed(1);
 
   return (
     <IonPage>
@@ -92,7 +98,9 @@ const InsightsPage: React.FC = () => {
                   <IonIcon icon={checkmarkCircle} color="success"></IonIcon>
                   <IonLabel>
                     <div className="custom-ip-mood-item">
-                      <p className="item_label">{t("moodStatsHappy")} ({happyCounter})</p>
+                      <p className="item_label">
+                        {t("moodStatsHappy")} ({happyCounter})
+                      </p>
                       <p>{getPercentage(happyCounter)}%</p>
                     </div>
                   </IonLabel>
@@ -101,7 +109,9 @@ const InsightsPage: React.FC = () => {
                   <IonIcon icon={checkmarkCircle} color="danger"></IonIcon>
                   <IonLabel>
                     <div className="custom-ip-mood-item">
-                      <p className="item_label">{t("moodStatsAngry")} ({angryCounter})</p>
+                      <p className="item_label">
+                        {t("moodStatsAngry")} ({angryCounter})
+                      </p>
                       <p>{getPercentage(angryCounter)}%</p>
                     </div>
                   </IonLabel>
@@ -110,7 +120,9 @@ const InsightsPage: React.FC = () => {
                   <IonIcon icon={checkmarkCircle} color="tertiary"></IonIcon>
                   <IonLabel>
                     <div className="custom-ip-mood-item">
-                      <p className="item_label">{t("moodStatsSad")} ({sadCounter})</p>
+                      <p className="item_label">
+                        {t("moodStatsSad")} ({sadCounter})
+                      </p>
                       <p>{getPercentage(sadCounter)}%</p>
                     </div>
                   </IonLabel>
@@ -119,7 +131,9 @@ const InsightsPage: React.FC = () => {
                   <IonIcon icon={checkmarkCircle} color="medium"></IonIcon>
                   <IonLabel>
                     <div className="custom-ip-mood-item">
-                      <p className="item_label">{t("moodStatsNone")} ({noMoodCounter})</p>
+                      <p className="item_label">
+                        {t("moodStatsNone")} ({noMoodCounter})
+                      </p>
                       <p>{getPercentage(noMoodCounter)}%</p>
                     </div>
                   </IonLabel>
