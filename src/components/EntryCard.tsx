@@ -16,7 +16,9 @@ const EntryCard: React.FC<any> = ({ entry, onClick }) => {
     <IonCard onClick={onClick}>
       <IonCardHeader>
         <IonCardTitle>{title}</IonCardTitle>
-        <IonCardSubtitle>{date.toDate().toString()}</IonCardSubtitle>
+        <IonCardSubtitle>
+          {date.toDate().toString().split("G")[0]}
+        </IonCardSubtitle>
         {mood ? (
           <div
             className="mood-ctn"

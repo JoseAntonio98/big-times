@@ -9,18 +9,22 @@ import "./styles/DayMessage.css";
 
 interface DayMessageProps {
   title: string;
+  entries: any;
 }
 
-const DayMessage: React.FC<DayMessageProps> = ({ title }) => {
+const DayMessage: React.FC<DayMessageProps> = ({ title, entries }) => {
+  const lastAdviceEntry = entries
+    ?.slice()
+    .reverse()
+    .find((entry: any) => entry.advice !== undefined && entry.advice !== "");
+
   return (
     <IonCard color="primary">
       <IonCardHeader>
         <IonCardTitle className="ion-text-center">{title}</IonCardTitle>
       </IonCardHeader>
       <IonCardContent className="custom-dm-message">
-        Here will be a AI message according the last user entry. For example:
-        "You are capable of greatness. Believe in yourself. Embrace challenges
-        as opportunities. Stay determined and persevere."
+        {lastAdviceEntry.advice}
       </IonCardContent>
     </IonCard>
   );

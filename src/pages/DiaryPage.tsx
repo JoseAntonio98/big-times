@@ -89,7 +89,7 @@ const DiaryPage: React.FC = () => {
           <IonRefresherContent></IonRefresherContent>
         </IonRefresher>
 
-        <DayMessage title={t("lastIaMessage")} />
+        <DayMessage title={t("lastIaMessage")} entries={entries} />
         {entries ? (
           <div style={{ marginTop: "2rem" }}>
             {entries.map((entry, index: number) => (
