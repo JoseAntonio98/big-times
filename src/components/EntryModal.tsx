@@ -74,7 +74,7 @@ const EntryModal: React.FC<EntryModalProps> = ({ isOpen, onClose, entry }) => {
 
   const handleDelete = async (id: string) => {
     setLoading(true);
-    console.log(`Deleting entry ${id}`);
+    //console.log(`Deleting entry ${id}`);
     await delete_note(id).then(() => {
       setLoading(false);
       onClose();
