@@ -8,7 +8,6 @@ import {
   IonPage,
   IonSearchbar,
   useIonViewDidEnter,
-  useIonViewDidLeave,
 } from "@ionic/react";
 import { auth, db } from "../FirebaseConfig";
 import EntryModal from "../components/EntryModal";
@@ -18,13 +17,13 @@ import EntryCard from "../components/EntryCard";
 import HeaderScreen from "../components/HeaderScreen";
 import { get_notes } from "../Utilities/user_firestore";
 import { useTranslation } from "react-i18next";
+import { Console } from "console";
 
 const DiaryPage: React.FC = () => {
   const { t } = useTranslation();
 
   const [selectedItem, setSelectedItem] = useState<any | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [isVisible, setIsVisible] = useState(true);
   const [entries, setEntries] = useState([{}]);
   const user = auth.currentUser;
 
@@ -54,17 +53,10 @@ const DiaryPage: React.FC = () => {
     setLoading(false);
   };
 
-  useIonViewDidEnter(() => {
-    setIsVisible(true);
-  });
-
-  useIonViewDidLeave(() => {
-    setIsVisible(false);
-  });
-
-  if (isVisible) {
+  useEffect(() => {
+    console.log("getEntries")
     getEntries();
-  }
+  }, []);
 
   if (loading) {
     return (
@@ -115,4 +107,4 @@ const DiaryPage: React.FC = () => {
   );
 };
 
-export default DiaryPage;
+export default React.memo(DiaryPage);
