@@ -1,5 +1,12 @@
 import { useState, useEffect } from "react";
-import { IonLoading, IonContent, IonDatetime, IonPage } from "@ionic/react";
+import {
+  IonLoading,
+  IonContent,
+  IonDatetime,
+  IonPage,
+  useIonViewDidEnter,
+  useIonViewDidLeave,
+} from "@ionic/react";
 
 // import Calendar from "react-calendar";
 
@@ -9,10 +16,8 @@ import EntryCard from "../components/EntryCard";
 
 import "react-calendar/dist/Calendar.css";
 import "./styles/CalendarPage.css";
-import { entries } from "../data/fake-data";
 import EntryModal from "../components/EntryModal";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { auth, db } from "../FirebaseConfig";
+import { auth } from "../FirebaseConfig";
 import { get_notes } from "../Utilities/user_firestore";
 import { useTranslation } from "react-i18next";
 
@@ -22,6 +27,7 @@ const CalendarPage: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<any | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [entries, setEntries] = useState([{}]);
+  const [isVisible, setIsVisible] = useState(true)
   const user = auth.currentUser;
 
   const handleItemClick = (item: any) => {
@@ -36,15 +42,24 @@ const CalendarPage: React.FC = () => {
     const data = await get_notes(user!.uid);
     setEntries(
       data.docs.map((doc) => ({
+        id: doc.id,
         ...doc.data(),
       }))
     );
     setLoading(false);
   };
 
-  useEffect(() => {
+  useIonViewDidEnter(() => {
+    setIsVisible(true);
+  });
+
+  useIonViewDidLeave(() => {
+    setIsVisible(false);
+  });
+
+  if (isVisible) {
     getEntries();
-  }, []);
+  }
 
   if (loading) {
     return (
