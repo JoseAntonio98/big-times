@@ -24,7 +24,7 @@ const DayMessage: React.FC<DayMessageProps> = ({ title, entries }) => {
         <IonCardTitle className="ion-text-center">{title}</IonCardTitle>
       </IonCardHeader>
       <IonCardContent className="custom-dm-message">
-        {lastAdviceEntry.advice}
+        {lastAdviceEntry != null ? lastAdviceEntry.advice : ""}
       </IonCardContent>
     </IonCard>
   );
