@@ -42,7 +42,7 @@ const LoginPage: React.FC = () => {
               className="ion-margin-bottom btn"
               onClick={handleLogin}
             >
-              <IonIcon slot="start" icon={logoGoogle}></IonIcon>
+              <IonIcon slot="start" icon={logoGoogle} color="primary"></IonIcon>
               Login with Google
             </IonButton>
             <IonButton
